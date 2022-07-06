@@ -6,6 +6,11 @@ sumfun <- function(x, ...){
 se <- function(x) sqrt(var(x,na.rm=TRUE)/length(na.omit(x)))
 mean2 <- function(x) mean(x, na.rm=TRUE)
 
+f2c <- function(x) {
+  x <- (5/9) * (x-32)
+  return(x)
+} #temperature conversion
+
 ###3 functions (fitgam, addpoly, predline, and smooth plot) ----------------------------------------------------------
 
 ###fitgam

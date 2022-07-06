@@ -14,6 +14,11 @@ condlab <- expression(italic(g)[s]~~(mol~m^-2~s^-1))
 itelab <- expression(ITE~~(mmol~CO[2]~mol~H[2]*O^-1))
 denslab <- expression(Stomatal~Density~~(mm^-2))
 treelab <- c( "Shoots", "Roots")
+tminlab <- expression(T[min])
+tmaxlab <- expression(T[max])
 
 pchs <- c(15, 16, 17)
 speciesnames <- c("Dogwood", "Maple", "Hawthorn")
+
+uniqueID_label <- c("dogwood-city", "dogwood-park", "hawthorn-city", "hawthorn-park", "maple-city", "maple-park")
+
