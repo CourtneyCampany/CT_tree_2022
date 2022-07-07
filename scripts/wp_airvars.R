@@ -28,74 +28,78 @@ jpeg(filename = "figures/waterpotential_pooled.jpeg",
 
 par(mgp=c(2.5,.75,0), mar=c(4,4,1,1), cex.lab=1.25)
 boxplot(wp_mp ~ uniqueID, data=waterpot,varwidth=TRUE,xaxt='n',
-        ylab="Water Potential (mPa)",border=trtcols,ylim=c(-4,0),xlab="",outline=FALSE,
+        ylab="Midday Leaf Water Potential (mPa)",border=trtcols,ylim=c(-3.5,0),xlab="",outline=FALSE,
         boxlwd=2, whisklwd=2,staplelwd=2)
 axis(1, labels=FALSE)
-text(x=1:6, y= par("usr")[3] - .45, labels = uniqueID_label, xpd=NA, srt=30, adj=.565, cex=1.25)
+text(x=1:6, y= par("usr")[3] - .3, labels = uniqueID_label, xpd=NA, srt=20, adj=.565, cex=1.25)
 stripchart(wp_mp ~ uniqueID, data=waterpot,
            vertical = TRUE, method = "jitter",cex=1.25,
            pch = 16,  col= trtcols2, xaxt='n', add=TRUE) 
-
+legend("bottomleft", legend = c("City", "Park"), lty =1, lwd=3, col=trtcols, inset=.01, 
+       bty='n')
 dev.off()
 
 
-### waterpotential thrpugh time
-
-startdate <- as.Date("2022-05-25")
-startweek <- as.Date("2022-05-23")
-axistime <- seq.Date(startweek, by="week", length=7,format = "%m-%d-%Y")
-xlim1 <- as.Date(strptime("05-23-2022", format = "%m-%d-%Y", tz=""))
-xlim2 <- as.Date(strptime("07-6-2022", format = "%m-%d-%Y", tz=""))
-xlimdays <- c(xlim1, xlim2)
+### waterpotential through time (2 panel)
 
 jpeg(filename = "figures/waterpot_time.jpeg",
      width = 8, height = 8, units = "in", res= 500)
 
-par(mar=c(5,5,1,1))
-plot (wp_mp.mean2 ~ Date, data = dogwood[dogwood$site=='c',], col=citycol, pch=15, cex=1.25,
-      ylim=c(-4,0), xlab="", xaxt='n', ylab = "Water Potential (mPa)", xlim = xlimdays)
+par(cex.axis=1.21, cex.lab=1.51, las=1,mgp=c(3,1,0),mfrow=c(2,1),  
+    omi=c(.5,0,0.1,0.1))
+
+par(mar=c(0,5,1,1))
+plot (wp_mp.mean2 ~ Date, data = dogwood[dogwood$site=='c',], col=citycol, pch=15, cex=1.5,
+      ylim=c(-3.7,0), xlab="", xaxt='n', ylab = "", xlim = xlimdays, type='b')
 axis.Date(1, at=axistime, labels=FALSE)
-text(x=axistime, y= par("usr")[3] - .4, labels = axistime, xpd=NA, srt=30, adj=.565, 
-     cex=1)
 
 with(dogwood[dogwood$site=='c',], arrows(x0=Date, y0=wp_mp.mean2, y1=wp_mp.mean2-wp_mp.se, 
                                          angle=90,length=0.05,col=citycol, lwd=1))
 with(dogwood[dogwood$site=='c',], arrows(x0=Date, y0=wp_mp.mean2, y1=wp_mp.mean2+wp_mp.se,
                                          angle=90,length=0.05,col=citycol, lwd=1))
 
-points(wp_mp.mean2 ~ Date, data = maple[maple$site=='c',], col=citycol, pch=16, cex=1.25)
+points(wp_mp.mean2 ~ Date, data = maple[maple$site=='c',], col=citycol, pch=16, cex=1.5, type='b')
 with(maple[maple$site=='c',], arrows(x0=Date, y0=wp_mp.mean2, y1=wp_mp.mean2-wp_mp.se, 
                                      angle=90,length=0.05, col=citycol, lwd=1))
 with(maple[maple$site=='c',], arrows(x0=Date, y0=wp_mp.mean2, y1=wp_mp.mean2+wp_mp.se, 
                                      angle=90,length=0.05, col=citycol, lwd=1))
 
-points(wp_mp.mean2 ~ Date, data = hawthorn[hawthorn$site=='c',], col=citycol, pch=17, cex=1.25)
+points(wp_mp.mean2 ~ Date, data = hawthorn[hawthorn$site=='c',], col=citycol, pch=17, 
+       cex=1.5, type='b')
 with(hawthorn[hawthorn$site=='c',], arrows(x0=Date, y0=wp_mp.mean2, y1=wp_mp.mean2-wp_mp.se,
                                            angle=90,length=0.05,col=citycol, lwd=1))
 with(hawthorn[hawthorn$site=='c',], arrows(x0=Date, y0=wp_mp.mean2, y1=wp_mp.mean2+wp_mp.se,
                                            angle=90,length=0.05,col=citycol, lwd=1))
 
 legend("bottomleft", pch=pchs,legend=speciesnames, bty='n', cex=1)
+text(x=startdate, y=-0.25, "City", font=3, cex=1.25)
 
-
-points(wp_mp.mean2 ~ Date, data = dogwood[dogwood$site=='p',], col=parkcol, pch=15,
-     ylim=c(0,20.5), xlab="",  ylab="", cex=1.25, xlim = xlimdays, xaxt='n')
+par(mar=c(1,5,0,1))
+plot(wp_mp.mean2 ~ Date, data = dogwood[dogwood$site=='p',], col=parkcol, pch=15,
+     ylim=c(-3.7,0), xlab="",  ylab="", cex=1.5, xlim = xlimdays, xaxt='n', type='b')
 with(dogwood[dogwood$site=='p',], arrows(x0=Date, y0=wp_mp.mean2, y1=wp_mp.mean2-wp_mp.se, angle=90,length=0.05,
                                          col=parkcol, lwd=1))
 with(dogwood[dogwood$site=='p',], arrows(x0=Date, y0=wp_mp.mean2, y1=wp_mp.mean2+wp_mp.se, angle=90,length=0.05,
                                          col=parkcol, lwd=1))
 
-points(wp_mp.mean2 ~ Date, data = maple[maple$site=='p',], col=parkcol, pch=16, cex=1.25)
+points(wp_mp.mean2 ~ Date, data = maple[maple$site=='p',], col=parkcol, pch=16, cex=1.5,type='b')
 with(maple[maple$site=='p',], arrows(x0=Date, y0=wp_mp.mean2, y1=wp_mp.mean2-wp_mp.se, angle=90,length=0.05,
                                      col=parkcol, lwd=1))
 with(maple[maple$site=='p',], arrows(x0=Date, y0=wp_mp.mean2, y1=wp_mp.mean2+wp_mp.se, angle=90,length=0.05,
                                      col=parkcol, lwd=1))
 
-points(wp_mp.mean2 ~ Date, data = hawthorn[hawthorn$site=='p',], col=parkcol, pch=17, cex=1.25)
+points(wp_mp.mean2 ~ Date, data = hawthorn[hawthorn$site=='p',], col=parkcol, pch=17, 
+       cex=1.5,type='b')
 with(hawthorn[hawthorn$site=='p',], arrows(x0=Date, y0=wp_mp.mean2, y1=wp_mp.mean2-wp_mp.se, angle=90,length=0.05,
                                            col=parkcol, lwd=1))
 with(hawthorn[hawthorn$site=='p',], arrows(x0=Date, y0=wp_mp.mean2, y1=wp_mp.mean2+wp_mp.se, angle=90,length=0.05,
                                            col=parkcol, lwd=1))
+text(x=axistime, y= par("usr")[3] - .4, labels = axistime, xpd=NA, srt=30, adj=.565, 
+     cex=1)
+axis.Date(1, at=axistime, labels=FALSE)
+text(x=startdate, y=-.25, "Park", font=3, cex=1.25)
+mtext("Midday Leaf Water Potential (mPa)", side=2, las=3, line=3, at=0, cex=1.25)
+
 dev.off()
 
 

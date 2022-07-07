@@ -9,8 +9,8 @@ trtcols2 <- scales::alpha(trtcols, .6)
 ratio_lab <- "Root to Shoot ratio"
 biomasslab <- "Total Biomass (g)"
 boxlabs <- c("Aquaponics", "Containerized")
-photolab <- expression(italic(A)~~(mu*mol~m^-2~s^-1))
-condlab <- expression(italic(g)[s]~~(mol~m^-2~s^-1))
+photolab <- expression(Photosynthesis~~(mu*mol~m^-2~s^-1))
+condlab <- expression(Stomatal~Conductance~~(mol~m^-2~s^-1))
 itelab <- expression(ITE~~(mmol~CO[2]~mol~H[2]*O^-1))
 denslab <- expression(Stomatal~Density~~(mm^-2))
 treelab <- c( "Shoots", "Roots")
@@ -22,3 +22,12 @@ speciesnames <- c("Dogwood", "Maple", "Hawthorn")
 
 uniqueID_label <- c("dogwood-city", "dogwood-park", "hawthorn-city", "hawthorn-park", "maple-city", "maple-park")
 
+##time objects
+startdate <- as.Date("2022-05-25")
+startweek <- as.Date("2022-05-23")
+startweek2 <- as.Date("MAY-23", format = "%B-%d")
+axistime <- seq.Date(startweek, by="week", length=7,format = "%m-%d-%Y")
+axistime2 <- seq.Date(startweek2, by="week", length=7,format = "%B-%d")
+xlim1 <- as.Date(strptime("05-23-2022", format = "%m-%d-%Y", tz=""))
+xlim2 <- as.Date(strptime("07-7-2022", format = "%m-%d-%Y", tz=""))
+xlimdays <- c(xlim1, xlim2)
