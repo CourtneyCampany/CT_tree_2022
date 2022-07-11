@@ -23,7 +23,7 @@ dbh<- read.csv("raw_data/dbh.csv")
   
 #2 panel stem diameter
 jpeg(filename = "figures/dbh_time.jpeg",
-       width = 8, height = 8, units = "in", res= 500)
+       width = 8, height = 6, units = "in", res= 500)
   
 par(cex.axis=1.21, cex.lab=1.51, las=1,mgp=c(3,1,0),mfrow=c(2,1),  
       omi=c(.5,0,0.1,0.1))
@@ -57,7 +57,7 @@ par(mar=c(1,5,0,1))
 plot(dbh_mm.mean2 ~ Date, data = dogwood[dogwood$site=='p',], col=parkcol, pch=15, type='b',
        ylim=c(20,60), xlab="",  ylab="", cex=1.5, xlim = xlimdays, xaxt='n')
 axis.Date(1, at=axistime, labels=FALSE)
-text(x=axistime, y= par("usr")[3] - 7, labels = axistime, xpd=NA, srt=30, adj=.565, 
+text(x=axistime, y= par("usr")[3] - 5, labels = axistime, xpd=NA, srt=30, adj=.565, 
        cex=1)
   
 with(dogwood[dogwood$site=='p',], arrows(x0=Date, y0=dbh_mm.mean2, y1=dbh_mm.mean2-dbh_mm.se, angle=90,length=0.05,

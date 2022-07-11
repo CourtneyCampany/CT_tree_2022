@@ -90,7 +90,7 @@ with(ratio_agg, arrows(x0=log10(fineroot.mean), y0=log10(leafmass.mean), y1=log1
 
 # windows()
 jpeg(filename = "figures/photosyn_time.jpeg",
-     width = 8, height = 8, units = "in", res= 500)
+     width = 8, height = 6, units = "in", res= 500)
 
 par(cex.axis=1.21, cex.lab=1.51, las=1,mgp=c(3,1,0),mfrow=c(2,1),  
     omi=c(.5,0,0.1,0.1))
@@ -152,7 +152,7 @@ dev.off()
 
 
 jpeg(filename = "figures/gsw_time.jpeg",
-     width = 8, height = 8, units = "in", res= 500)
+     width = 8, height = 6, units = "in", res= 500)
 
 par(cex.axis=1.21, cex.lab=1.51, las=1,mgp=c(3,1,0),mfrow=c(2,1),  
     omi=c(.5,0,0.1,0.1))
@@ -181,13 +181,13 @@ with(hawthorn[hawthorn$site=='c',], arrows(x0=Date, y0=gsw.mean, y1=gsw.mean+gsw
                                            col=citycol, lwd=1))
 
 legend("bottomleft", pch=pchs,legend=speciesnames, bty='n', cex=1)
-text(x=startdate, y=.3, "City", font=3, cex=1.25)
+text(x=startdate, y=.28, "City", font=3, cex=1.25)
 
 par(mar=c(1,5,0,1))
 plot(gsw.mean ~ Date, data = dogwood[dogwood$site=='p',], col=parkcol, pch=15, type='b',
      ylim=c(0,.3), xlab="",  ylab="", cex=1.5, xlim = xlimdays, xaxt='n')
 axis.Date(1, at=axistime, labels=FALSE)
-text(x=axistime2, y= par("usr")[3] - .03, labels = axistime, xpd=NA, srt=30, adj=.565, 
+text(x=axistime2, y= par("usr")[3] - .035, labels = axistime, xpd=NA, srt=30, adj=.565, 
      cex=1)
 
 with(dogwood[dogwood$site=='p',], arrows(x0=Date, y0=gsw.mean, y1=gsw.mean-gsw.se, angle=90,length=0.05,
@@ -207,7 +207,7 @@ with(hawthorn[hawthorn$site=='p',], arrows(x0=Date, y0=gsw.mean, y1=gsw.mean-gsw
 with(hawthorn[hawthorn$site=='p',], arrows(x0=Date, y0=gsw.mean, y1=gsw.mean+gsw.se, angle=90,length=0.05,
                                            col=parkcol, lwd=1))
 mtext(condlab, side=2, las=3, line=3, at=.3, cex=1.25)
-text(x=startdate, y=.3, "Park", font=3, cex=1.25)
+text(x=startdate, y=.28, "Park", font=3, cex=1.25)
 dev.off()
 
 

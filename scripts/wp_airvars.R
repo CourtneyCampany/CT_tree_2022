@@ -24,7 +24,7 @@ hawthorn <- wp_agg[wp_agg$species == "h",]
 
 
 jpeg(filename = "figures/waterpotential_pooled.jpeg",
-     width = 6, height = 6, units = "in", res= 500)
+     width = 8, height = 6, units = "in", res= 500)
 
 par(mgp=c(2.5,.75,0), mar=c(4,4,1,1), cex.lab=1.25)
 boxplot(wp_mp ~ uniqueID, data=waterpot,varwidth=TRUE,xaxt='n',
@@ -43,7 +43,7 @@ dev.off()
 ### waterpotential through time (2 panel)
 
 jpeg(filename = "figures/waterpot_time.jpeg",
-     width = 8, height = 8, units = "in", res= 500)
+     width = 8, height = 6, units = "in", res= 500)
 
 par(cex.axis=1.21, cex.lab=1.51, las=1,mgp=c(3,1,0),mfrow=c(2,1),  
     omi=c(.5,0,0.1,0.1))
@@ -106,7 +106,6 @@ dev.off()
 ###weather data
 library(plantecophys)
 
-par(mar=c(5,5,1,1))
 airvars <- read.csv("raw_data/weather_data_wunderground_charlestown.csv")
   airvars$date <- as.Date(airvars$date, format = "%m/%d/%Y")
   airvars$temp_max_c <- with(airvars, f2c(temp_max))
@@ -119,32 +118,33 @@ airvars <- read.csv("raw_data/weather_data_wunderground_charlestown.csv")
   
 #temperature
 jpeg(filename = "figures/temperature.jpeg",width = 8, height = 8, units = "in", res= 500)
-  
-with(airvars, {plot(date, temp_max_c , type='l', col="red",ylim=c(0,40),lwd=2,
+par(mgp=c(2.5,.75,0), mar=c(5,5,1,1), cex.lab=1.5)
+with(airvars, {plot(date, temp_max_c , type='l', col="red",ylim=c(10,37),lwd=3,
          xlab="",axes=FALSE,ylab=expression(T[min]~and~T[max]~(degree*C)),xlim=xlimdays,
          panel.first={
            addpoly(date, temp_min_c, temp_max_c ,col="grey95")
          })
     lines(date, temp_min_c, col="blue", lwd=2)
 })
-axis(2)
+axis(2, cex=1.5)
 axis.Date(1, at=axistime, labels=FALSE)
 legend("bottomright",col=c("red","blue"),lty=1,lwd=2,legend=c(tmaxlab,tminlab), inset=.01, 
-       cex=1.25, bty='n')
+       cex=1.5, bty='n')
 box()
-text(x=axistime, y= par("usr")[3] - 4.5, labels = axistime, xpd=NA, srt=30, adj=.565, 
-     cex=1)
+text(x=axistime, y= par("usr")[3] - 1.5, labels = axistime, xpd=NA, srt=30, adj=.565, 
+     cex=1.25)
 dev.off()
 
 #rain
 jpeg(filename = "figures/precipitation.jpeg",width = 8, height = 8, units = "in", res= 500)
-plot(precipt_total_mm~date, type="l",col="dodgerblue",xlab="",lwd=2,ylim=c(0,25),
+par(mgp=c(2.5,.75,0), mar=c(5,5,1,1), cex.lab=1.5)
+plot(precipt_total_mm~date, type="l",col="black",xlab="",ylim=c(0,35),lwd=3,
      xlim=xlimdays,ylab="Daily Preciptiation (mm)",data=airvars, axes=FALSE)
-axis(2)
+axis(2, cex=1.5)
 axis.Date(1, at=axistime, label=FALSE)
 box()
 text(x=axistime, y= par("usr")[3] - 3, labels = axistime, xpd=NA, srt=30, adj=.565, 
-     cex=1)
+     cex=1.25)
 dev.off()
 
 #vpd
@@ -152,12 +152,12 @@ dev.off()
 jpeg(filename = "figures/vpd.jpeg",
      width = 8, height = 8, units = "in", res= 500)
 
-plot(vpd_max~date, type="l",col="forestgreen",xlab="",lwd=2,ylim=c(0,2.5),xlim=xlimdays,
+plot(vpd_max~date, type="l",col="forestgreen",xlab="",lwd=2,ylim=c(0,3.5),xlim=xlimdays,
      ylab=expression(VPD[max]~~(kPa)),data=airvars, axes=FALSE)
 axis(2)
 axis.Date(1, at=axistime, label=FALSE)
 box()
 text(x=axistime, y= par("usr")[3] - .3, labels = axistime, xpd=NA, srt=30, adj=.565, 
-     cex=1)
+     cex=1.25)
 
 dev.off()
