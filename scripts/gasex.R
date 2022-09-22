@@ -12,7 +12,7 @@ gasex <- read.csv("raw_data/gasexchange_master.csv")
 #extract species ---------
 #boxplot, with species by site pooled (no time)
 
-#photosynthesis
+#photosynthesis-------
 jpeg(filename = "figures/photosynthesis_pooled.jpeg",
      width = 8, height = 6, units = "in", res= 500)
 
@@ -29,7 +29,7 @@ legend("topright", legend = c("City", "Park"), lty =1, lwd=4, col=trtcols, inset
        bty='n', cex=1.5)
 dev.off()
 
-#stomatal conductance
+#stomatal conductance------
 jpeg(filename = "figures/stomatalconductance_pooled.jpeg",
      width = 8, height = 6, units = "in", res= 500)
 par(mgp=c(2.5,.75,0), mar=c(5,5,1,1), cex.lab=1.25)
@@ -45,7 +45,7 @@ legend("topright", legend = c("City", "Park"), lty =1, lwd=4, col=trtcols, inset
        bty='n', cex=1.5)
 dev.off()
 
-#ITE
+#ITE------------------
 jpeg(filename = "figures/wateruseefficiency_pooled.jpeg",
      width = 8, height = 6, units = "in", res= 500)
 par(mgp=c(2.5,.75,0), mar=c(5,5,1,1), cex.lab=1.25)
@@ -97,7 +97,7 @@ par(cex.axis=1.21, cex.lab=1.51, las=1,mgp=c(3,1,0),mfrow=c(2,1),
 
 par(mar=c(0,5,1,1))
 plot (A.mean ~ Date, data = dogwood[dogwood$site=='c',], col=citycol, pch=15, type='b', cex=1.5,
-      ylim=c(0,20.5), xlab="", xaxt='n', ylab="", xlim = xlimdays)
+      ylim=c(0,25), xlab="", xaxt='n', ylab="", xlim = xlimdays)
 axis.Date(1, at=axistime, labels=FALSE)
 
 with(dogwood[dogwood$site=='c',], arrows(x0=Date, y0=A.mean, y1=A.mean-A.se, angle=90,length=0.05,
@@ -118,14 +118,14 @@ with(hawthorn[hawthorn$site=='c',], arrows(x0=Date, y0=A.mean, y1=A.mean-A.se, a
 with(hawthorn[hawthorn$site=='c',], arrows(x0=Date, y0=A.mean, y1=A.mean+A.se, angle=90,length=0.05,
                                          col=citycol, lwd=1))
 
-legend("bottomleft", pch=pchs,legend=speciesnames, bty='n', cex=1)
-text(x=startdate, y=19.5, "City", font=3, cex=1.25)
+legend("topleft", pch=pchs,legend=speciesnames, bty='n', cex=1)
+text(x=as.Date("2022-07-25"), y=2, "City", font=3, cex=1.25)
 
 par(mar=c(1,5,0,1))
 plot(A.mean ~ Date, data = dogwood[dogwood$site=='p',], col=parkcol, pch=15, type='b',
-     ylim=c(0,20.5), xlab="",  ylab="", cex=1.5, xlim = xlimdays, xaxt='n')
+     ylim=c(0,25), xlab="",  ylab="", cex=1.5, xlim = xlimdays, xaxt='n')
 axis.Date(1, at=axistime, labels=FALSE)
-text(x=axistime2, y= par("usr")[3] - 2, labels = axistime, xpd=NA, srt=30, adj=.565, 
+text(x=axistime2, y= par("usr")[3] - 3, labels = axistime, xpd=NA, srt=30, adj=.565, 
      cex=1)
 
 with(dogwood[dogwood$site=='p',], arrows(x0=Date, y0=A.mean, y1=A.mean-A.se, angle=90,length=0.05,
@@ -144,12 +144,11 @@ with(hawthorn[hawthorn$site=='p',], arrows(x0=Date, y0=A.mean, y1=A.mean-A.se, a
                                            col=parkcol, lwd=1))
 with(hawthorn[hawthorn$site=='p',], arrows(x0=Date, y0=A.mean, y1=A.mean+A.se, angle=90,length=0.05,
                                            col=parkcol, lwd=1))
-mtext(photolab, side=2, las=3, line=2.5, at=20, cex=1.25)
-text(x=startdate, y=19.5, "Park", font=3, cex=1.25)
+mtext(photolab, side=2, las=3, line=2.5, at=25, cex=1.25)
+text(x=as.Date("2022-07-25"), y=2, "Park", font=3, cex=1.25)
 dev.off()
 
 # 2 panel gsw--------------------
-
 
 jpeg(filename = "figures/gsw_time.jpeg",
      width = 8, height = 6, units = "in", res= 500)
@@ -159,7 +158,7 @@ par(cex.axis=1.21, cex.lab=1.51, las=1,mgp=c(3,1,0),mfrow=c(2,1),
 
 par(mar=c(0,5,1,1))
 plot (gsw.mean ~ Date, data = dogwood[dogwood$site=='c',], col=citycol, pch=15, type='b', cex=1.5,
-      ylim=c(0,.3), xlab="", xaxt='n', ylab="", xlim = xlimdays)
+      ylim=c(0,.45), xlab="", xaxt='n', ylab="", xlim = xlimdays)
 axis.Date(1, at=axistime, labels=FALSE)
 
 with(dogwood[dogwood$site=='c',], arrows(x0=Date, y0=gsw.mean, y1=gsw.mean-gsw.se, angle=90,length=0.05,
@@ -179,15 +178,14 @@ with(hawthorn[hawthorn$site=='c',], arrows(x0=Date, y0=gsw.mean, y1=gsw.mean-gsw
                                            col=citycol, lwd=1))
 with(hawthorn[hawthorn$site=='c',], arrows(x0=Date, y0=gsw.mean, y1=gsw.mean+gsw.se, angle=90,length=0.05,
                                            col=citycol, lwd=1))
-
-legend("bottomleft", pch=pchs,legend=speciesnames, bty='n', cex=1)
-text(x=startdate, y=.28, "City", font=3, cex=1.25)
+legend("topleft", pch=pchs,legend=speciesnames, bty='n', cex=1)
+text(x=as.Date("2022-07-25"), y=.02, "City", font=3, cex=1.25)
 
 par(mar=c(1,5,0,1))
 plot(gsw.mean ~ Date, data = dogwood[dogwood$site=='p',], col=parkcol, pch=15, type='b',
-     ylim=c(0,.3), xlab="",  ylab="", cex=1.5, xlim = xlimdays, xaxt='n')
+     ylim=c(0,.45), xlab="",  ylab="", cex=1.5, xlim = xlimdays, xaxt='n')
 axis.Date(1, at=axistime, labels=FALSE)
-text(x=axistime2, y= par("usr")[3] - .035, labels = axistime, xpd=NA, srt=30, adj=.565, 
+text(x=axistime2, y= par("usr")[3] - .05, labels = axistime, xpd=NA, srt=30, adj=.565, 
      cex=1)
 
 with(dogwood[dogwood$site=='p',], arrows(x0=Date, y0=gsw.mean, y1=gsw.mean-gsw.se, angle=90,length=0.05,
@@ -206,8 +204,69 @@ with(hawthorn[hawthorn$site=='p',], arrows(x0=Date, y0=gsw.mean, y1=gsw.mean-gsw
                                            col=parkcol, lwd=1))
 with(hawthorn[hawthorn$site=='p',], arrows(x0=Date, y0=gsw.mean, y1=gsw.mean+gsw.se, angle=90,length=0.05,
                                            col=parkcol, lwd=1))
-mtext(condlab, side=2, las=3, line=3, at=.3, cex=1.25)
-text(x=startdate, y=.28, "Park", font=3, cex=1.25)
+
+mtext(condlab, side=2, las=3, line=3, at=.5, cex=1.25)
+text(x=as.Date("2022-07-25"), y=.02, "Park", font=3, cex=1.25)
 dev.off()
 
+# 2 panel WUE------------
+
+jpeg(filename = "figures/wue_time.jpeg",
+     width = 8, height = 6, units = "in", res= 500)
+
+par(cex.axis=1.21, cex.lab=1.51, las=1,mgp=c(3,1,0),mfrow=c(2,1),  
+    omi=c(.5,0,0.1,0.1))
+
+par(mar=c(0,5,1,1))
+plot (ITE.mean ~ Date, data = dogwood[dogwood$site=='c',], col=citycol, pch=15, type='b', cex=1.5,
+      ylim=c(0,6), xlab="", xaxt='n', ylab="", xlim = xlimdays)
+axis.Date(1, at=axistime, labels=FALSE)
+
+with(dogwood[dogwood$site=='c',], arrows(x0=Date, y0=ITE.mean, y1=ITE.mean-ITE.se, angle=90,length=0.05,
+                                         col=citycol, lwd=1))
+with(dogwood[dogwood$site=='c',], arrows(x0=Date, y0=ITE.mean, y1=ITE.mean+ITE.se, angle=90,length=0.05,
+                                         col=citycol, lwd=1))
+
+points(ITE.mean ~ Date, data = maple[maple$site=='c',], col=citycol, pch=16, type='b', cex=1.5)
+with(maple[maple$site=='c',], arrows(x0=Date, y0=ITE.mean, y1=ITE.mean-ITE.se, angle=90,length=0.05,
+                                     col=citycol, lwd=1))
+with(maple[maple$site=='c',], arrows(x0=Date, y0=ITE.mean, y1=ITE.mean+ITE.se, angle=90,length=0.05,
+                                     col=citycol, lwd=1))
+
+
+points(ITE.mean ~ Date, data = hawthorn[hawthorn$site=='c',], col=citycol, pch=17, type='b', cex=1.5)
+with(hawthorn[hawthorn$site=='c',], arrows(x0=Date, y0=ITE.mean, y1=ITE.mean-ITE.se, angle=90,length=0.05,
+                                           col=citycol, lwd=1))
+with(hawthorn[hawthorn$site=='c',], arrows(x0=Date, y0=ITE.mean, y1=ITE.mean+ITE.se, angle=90,length=0.05,
+                                           col=citycol, lwd=1))
+
+legend("bottomleft", pch=pchs,legend=speciesnames, bty='n', cex=1)
+text(x=as.Date("2022-07-25"), y=.5, "City", font=3, cex=1.25)
+
+par(mar=c(1,5,0,1))
+plot(ITE.mean ~ Date, data = dogwood[dogwood$site=='p',], col=parkcol, pch=15, type='b',
+     ylim=c(0,6), xlab="",  ylab="", cex=1.5, xlim = xlimdays, xaxt='n')
+axis.Date(1, at=axistime, labels=FALSE)
+text(x=axistime2, y= par("usr")[3] - .75, labels = axistime, xpd=NA, srt=30, adj=.565, 
+     cex=1)
+
+with(dogwood[dogwood$site=='p',], arrows(x0=Date, y0=ITE.mean, y1=ITE.mean-ITE.se, angle=90,length=0.05,
+                                         col=parkcol, lwd=1))
+with(dogwood[dogwood$site=='p',], arrows(x0=Date, y0=ITE.mean, y1=ITE.mean+ITE.se, angle=90,length=0.05,
+                                         col=parkcol, lwd=1))
+
+points(ITE.mean ~ Date, data = maple[maple$site=='p',], col=parkcol, pch=16, type='b', cex=1.5)
+with(maple[maple$site=='p',], arrows(x0=Date, y0=ITE.mean, y1=ITE.mean-ITE.se, angle=90,length=0.05,
+                                     col=parkcol, lwd=1))
+with(maple[maple$site=='p',], arrows(x0=Date, y0=ITE.mean, y1=ITE.mean+ITE.se, angle=90,length=0.05,
+                                     col=parkcol, lwd=1))
+
+points(ITE.mean ~ Date, data = hawthorn[hawthorn$site=='p',], col=parkcol, pch=17, type='b', cex=1.5)
+with(hawthorn[hawthorn$site=='p',], arrows(x0=Date, y0=ITE.mean, y1=ITE.mean-ITE.se, angle=90,length=0.05,
+                                           col=parkcol, lwd=1))
+with(hawthorn[hawthorn$site=='p',], arrows(x0=Date, y0=ITE.mean, y1=ITE.mean+ITE.se, angle=90,length=0.05,
+                                           col=parkcol, lwd=1))
+mtext(itelab, side=2, las=3, line=2.5, at=6, cex=1.25)
+text(x=as.Date("2022-07-25"), y=.5, "Park", font=3, cex=1.25)
+dev.off()
 

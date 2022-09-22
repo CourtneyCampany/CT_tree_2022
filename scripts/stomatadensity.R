@@ -14,7 +14,7 @@ stomata$stomatadens_mm2 <- with(stomata, (stomata_count/(pi * (fov_diam_mm/2)^2)
 stomata_plantmean <- doBy::summaryBy(stomatadens_mm2 ~ site + species + plant_num + Date + 
                                        uniqueID,FUN=mean2, keep.names = TRUE, data=stomata)
 
-#photosynthesis
+#stomata pooled-----
 jpeg(filename = "figures/stomatadensity_pooled.jpeg",
      width = 8, height = 6, units = "in", res= 500)
 
@@ -31,7 +31,7 @@ legend("topleft", legend = c("City", "Park"), lty =1, lwd=4, col=trtcols, inset=
        bty='n', cex=1.5)
 dev.off()
 
-##stomata density through time
+##stomata density through time-----
 
 stomata_agg <- doBy::summaryBy(stomatadens_mm2 ~ site + species + Date + 
                 uniqueID,FUN=c(mean2,se), data=stomata_plantmean)
@@ -69,8 +69,8 @@ with(hawthorn[hawthorn$site=='c',], arrows(x0=Date, y0=stomatadens_mm2.mean2, y1
 with(hawthorn[hawthorn$site=='c',], arrows(x0=Date, y0=stomatadens_mm2.mean2, y1=stomatadens_mm2.mean2+stomatadens_mm2.se, angle=90,length=0.05,
                                            col=citycol, lwd=1))
 
-legend("bottomleft", pch=pchs,legend=speciesnames, bty='n', cex=1)
-text(x=startdate, y=800, "City", font=3, cex=1.25)
+legend("bottomright", pch=pchs,legend=speciesnames, bty='n', cex=1)
+text(x=startdate, y=750, "City", font=3, cex=1.25)
 
 par(mar=c(1,5,0,1))
 plot(stomatadens_mm2.mean2 ~ Date, data = dogwood[dogwood$site=='p',], col=parkcol, pch=15, type='b',
@@ -96,7 +96,7 @@ with(hawthorn[hawthorn$site=='p',], arrows(x0=Date, y0=stomatadens_mm2.mean2, y1
 with(hawthorn[hawthorn$site=='p',], arrows(x0=Date, y0=stomatadens_mm2.mean2, y1=stomatadens_mm2.mean2+stomatadens_mm2.se, angle=90,length=0.05,
                                            col=parkcol, lwd=1))
 mtext(denslab, side=2, las=3, line=2.5, at=800, cex=1.25)
-text(x=startdate, y=800, "Park", font=3, cex=1.25)
+text(x=startdate, y=750, "Park", font=3, cex=1.25)
 dev.off()
 
 

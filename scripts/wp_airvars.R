@@ -15,13 +15,6 @@ maple <- wp_agg[wp_agg$species == "m",]
 dogwood <- wp_agg[wp_agg$species == "d",]
 hawthorn <- wp_agg[wp_agg$species == "h",] 
 
-# windows()
-# sciplot::bargraph.CI(as.factor(site), waterpotential, group=species,data=waterpot,
-#             ylim = c(-2,0), ylab = "Water Potential (mPa)", 
-#             xlab = "Pot Volume (l)", legend=TRUE, col=trtcols, x.leg=.1, y.leg=-1.5)
-# 
-# box()
-
 
 jpeg(filename = "figures/waterpotential_pooled.jpeg",
      width = 8, height = 6, units = "in", res= 500)
@@ -36,7 +29,7 @@ stripchart(wp_mp ~ uniqueID, data=waterpot,
            vertical = TRUE, method = "jitter",cex=1.25,
            pch = 16,  col= trtcols2, xaxt='n', add=TRUE) 
 legend("bottomleft", legend = c("City", "Park"), lty =1, lwd=3, col=trtcols, inset=.01, 
-       bty='n')
+       bty='n', cex=1.5)
 dev.off()
 
 

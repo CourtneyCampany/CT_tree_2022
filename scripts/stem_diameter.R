@@ -14,12 +14,6 @@ dbh<- read.csv("raw_data/dbh.csv")
   dogwood <- dbh_agg[dbh_agg$species == "d",]
   hawthorn <- dbh_agg[dbh_agg$species == "h",] 
   
-  startdate <- as.Date("2022-05-25")
-  startweek <- as.Date("2022-05-23")
-  axistime <- seq.Date(startweek, by="week", length=7,format = "%m-%d-%Y")
-  xlim1 <- as.Date(strptime("05-23-2022", format = "%m-%d-%Y", tz=""))
-  xlim2 <- as.Date(strptime("07-6-2022", format = "%m-%d-%Y", tz=""))
-  xlimdays <- c(xlim1, xlim2)
   
 #2 panel stem diameter
 jpeg(filename = "figures/dbh_time.jpeg",

@@ -7,6 +7,8 @@ trtcols <- c(citycol, parkcol)
 trtcols2 <- scales::alpha(trtcols, .6)
 trtcols3 <- scales::alpha(trtcols, .3)
 
+pchs = c(15,17,16)
+
 ratio_lab <- "Root to Shoot ratio"
 biomasslab <- "Total Biomass (g)"
 boxlabs <- c("Aquaponics", "Containerized")
@@ -30,8 +32,8 @@ uniqueID_label <- c("dogwood-city", "dogwood-park", "hawthorn-city", "hawthorn-p
 startdate <- as.Date("2022-05-25")
 startweek <- as.Date("2022-05-23")
 startweek2 <- as.Date("MAY-23", format = "%B-%d")
-axistime <- seq.Date(startweek, by="week", length=8,format = "%m-%d-%Y")
-axistime2 <- seq.Date(startweek2, by="week", length=8,format = "%B-%d")
+axistime <- seq.Date(startweek, by="week", length=11,format = "%m-%d-%Y")
+axistime2 <- seq.Date(startweek2, by="week", length=11,format = "%B-%d")
 xlim1 <- as.Date(strptime("05-23-2022", format = "%m-%d-%Y", tz=""))
-xlim2 <- as.Date(strptime("07-10-2022", format = "%m-%d-%Y", tz=""))
+xlim2 <- as.Date(strptime("07-30-2022", format = "%m-%d-%Y", tz=""))
 xlimdays <- c(xlim1, xlim2)
