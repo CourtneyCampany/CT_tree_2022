@@ -22,6 +22,7 @@ tmaxlab <- expression(T[max])
 denslab <- expression(Stomatal~Density~~(mm^-2))
 slalab<- expression(Specific~Leaf~Area~~(cm^2~g^-1))
 lmalab<- expression(Leaf~Mass~Area~~(g^1~m^2))
+stomsizelab <- expression(Stomatal~size~~(um^2))
 
 pchs <- c(15, 16, 17)
 speciesnames <- c("Dogwood", "Maple", "Hawthorn")
