@@ -11,6 +11,17 @@ ground <- read.csv("raw_data/ground_temperature.csv")
 
 ground$temp_c <- f2c(ground$temperature_F)
 
+#stats
+ground_mean <- doBy::summaryBy(temp_c ~ site + species + Date + replicate,
+                                FUN=mean2, data=ground)
+
+citymean <- mean(ground_mean[ground_mean$site=="c", "temp_c.mean2"])
+parkmean <- mean(ground_mean[ground_mean$site=="p", "temp_c.mean2"])
+
+groundtest <- t.test(ground_mean[ground_mean$site=="c", "temp_c.mean2"],
+                     ground_mean[ground_mean$site=="p", "temp_c.mean2"])
+
+
 #ground temp_pooled
 jpeg(filename = "figures/ground_temp_pooled.jpeg",
      width = 8, height = 6, units = "in", res= 500)
@@ -28,10 +39,12 @@ legend("bottomleft", legend = c("City", "Park"), lty =1, lwd=4, col=trtcols, ins
        bty='n', cex=1.5)
 dev.off()
 
-##stomata density through time
+##ground temp through time
 
 ground_agg <- doBy::summaryBy(temp_c ~ site + species + Date + 
                                  uniqueID,FUN=c(mean2,se), data=ground)
+
+
 
 maple <- ground_agg[ground_agg$species == "m",]
 dogwood <- ground_agg[ground_agg$species == "d",]
@@ -95,5 +108,21 @@ mtext("Ground Temperature  (C)", side=2, las=3, line=2.5, at=45, cex=1.25)
 text(x=startdate, y=43, "Park", font=3, cex=1.25)
 dev.off()
 
+
+#ground temp_pooled by site
+jpeg(filename = "figures/ground_temp_site.jpeg",
+     width = 8, height = 6, units = "in", res= 500)
+
+par(mgp=c(2.5,.75,0), mar=c(5,5,1,1), cex.lab=1.25)
+boxplot(temp_c ~ site, data=ground,varwidth=TRUE,xlab="",xaxt='n',
+        ylab="Ground Temperature  (C)",border=trtcols,ylim=c(7,45),outline=FALSE,
+        boxlwd=2, whisklwd=2,staplelwd=2)
+axis(side=1, at = 1:2, labels = c("City", "Park"), cex.axis=1.25)
+stripchart(temp_c ~ site, data=ground,
+           vertical = TRUE, method = "jitter",cex=1.25,
+           pch = 16,  col= trtcols3, xaxt='n', add=TRUE) 
+# legend("bottomleft", legend = c("City", "Park"), lty =1, lwd=4, col=trtcols, inset=.01, 
+#        bty='n', cex=1.5)
+dev.off()
 
 

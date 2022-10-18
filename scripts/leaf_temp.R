@@ -11,6 +11,18 @@ leaft$uniqueID <- paste(leaft$species, leaft$site, sep = "-")
 leaft$top_c <- f2c(leaft$top_F)
 leaft$bottom_c <- f2c(leaft$bottom_F)
 
+
+## stats
+
+leaft_mean <- doBy::summaryBy(bottom_c ~ site + species + Date + replicate
+              ,FUN=c(mean2), data=leaft, keep.names=TRUE)
+
+citymean <- mean(leaft_mean[leaft_mean$site=="c", "bottom_c"])
+parkmean <- mean(leaft_mean[leaft_mean$site=="p", "bottom_c"])
+
+leaftest <- t.test(leaft_mean[leaft_mean$site=="c", "bottom_c"],
+                     leaft_mean[leaft_mean$site=="p", "bottom_c"])
+
 #leaftop temp_pooled
 jpeg(filename = "figures/leaftop_pooled.jpeg",
      width = 8, height = 6, units = "in", res= 500)

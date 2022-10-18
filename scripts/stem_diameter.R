@@ -14,6 +14,15 @@ dbh<- read.csv("raw_data/dbh.csv")
   dogwood <- dbh_agg[dbh_agg$species == "d",]
   hawthorn <- dbh_agg[dbh_agg$species == "h",] 
   
+#stats-------
+start <- dbh[dbh$date == "5/24/2022", c("site", "species", "dbh_mm")]
+finish <- dbh[dbh$date == "7/27/2022",c("site", "species", "dbh_mm")]
+growth <- finish$dbh_mm - start$dbh_mm
+  citymean <- mean(ground_mean[ground_mean$site=="c", "temp_c.mean2"])
+  parkmean <- mean(ground_mean[ground_mean$site=="p", "temp_c.mean2"])
+  
+  groundtest <- t.test(ground_mean[ground_mean$site=="c", "temp_c.mean2"],
+                       ground_mean[ground_mean$site=="p", "temp_c.mean2"])
   
 #2 panel stem diameter
 jpeg(filename = "figures/dbh_time.jpeg",

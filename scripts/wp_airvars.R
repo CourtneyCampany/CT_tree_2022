@@ -99,7 +99,7 @@ dev.off()
 ###weather data
 library(plantecophys)
 
-airvars <- read.csv("raw_data/weather_data_wunderground_charlestown.csv")
+airvars <- read.csv("raw_data/weather_data_wunderground_hagerstown.csv")
   airvars$date <- as.Date(airvars$date, format = "%m/%d/%Y")
   airvars$temp_max_c <- with(airvars, f2c(temp_max))
   airvars$temp_avg_c <- with(airvars, f2c(temp_avg))
@@ -111,7 +111,7 @@ airvars <- read.csv("raw_data/weather_data_wunderground_charlestown.csv")
   
 #temperature
 jpeg(filename = "figures/temperature.jpeg",width = 8, height = 8, units = "in", res= 500)
-par(mgp=c(2.5,.75,0), mar=c(5,5,1,1), cex.lab=1.5)
+par(mgp=c(2.5,.75,0), mar=c(5,5,1,2), cex.lab=1.5)
 with(airvars, {plot(date, temp_max_c , type='l', col="red",ylim=c(10,37),lwd=3,
          xlab="",axes=FALSE,ylab=expression(T[min]~and~T[max]~(degree*C)),xlim=xlimdays,
          panel.first={
@@ -130,7 +130,7 @@ dev.off()
 
 #rain
 jpeg(filename = "figures/precipitation.jpeg",width = 8, height = 8, units = "in", res= 500)
-par(mgp=c(2.5,.75,0), mar=c(5,5,1,1), cex.lab=1.5)
+par(mgp=c(2.5,.75,0), mar=c(5,5,1,2), cex.lab=1.5)
 plot(precipt_total_mm~date, type="l",col="black",xlab="",ylim=c(0,35),lwd=3,
      xlim=xlimdays,ylab="Daily Preciptiation (mm)",data=airvars, axes=FALSE)
 axis(2, cex=1.5)
@@ -144,7 +144,7 @@ dev.off()
 
 jpeg(filename = "figures/vpd.jpeg",
      width = 8, height = 8, units = "in", res= 500)
-
+par(mgp=c(2.5,.75,0), mar=c(5,5,1,2), cex.lab=1.5)
 plot(vpd_max~date, type="l",col="forestgreen",xlab="",lwd=2,ylim=c(0,3.5),xlim=xlimdays,
      ylab=expression(VPD[max]~~(kPa)),data=airvars, axes=FALSE)
 axis(2)
