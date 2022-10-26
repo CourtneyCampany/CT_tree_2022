@@ -10,6 +10,22 @@ thick <- read.csv("raw_data/leafthick.csv")
   thick$uniqueID <- paste(thick$species, thick$site, sep = "-")
   thick$sla_cm2g <- with(thick, area_cm2/drymass_g)
   thick$lma_gm2 <- with(thick, drymass_g/(area_cm2*0.0001))
+  
+##stats-----
+test <- aov(log(lma_gm2) ~ species * site, data=thick)
+qqPlot(residuals(test))#pretty good
+plot(test)
+summary(test)
+  
+site <- TukeyHSD(test, which = "site")
+species <- TukeyHSD(test, which = "species")
+interaction <- TukeyHSD(test)
+
+cld(glht(test, linfct=mcp(species = "Tukey")))
+
+species_agg<- doBy::summaryBy(lma_gm2 ~ species , 
+                          data =thick, FUN=mean2, keep.names=TRUE)
+
 
 
 #lma------
