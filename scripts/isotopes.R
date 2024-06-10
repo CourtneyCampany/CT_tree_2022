@@ -11,7 +11,7 @@ library(smatr)
 library(emmeans)
 library(car)
   
-isotopes_mod <- aov(c13 ~ species * site, data=element)
+isotopes_mod <- aov(c13 ~ species * site, data=alldata)
 car::qqPlot(residuals(isotopes_mod))#pretty good
 plot(isotopes_mod)
 summary(isotopes_mod) #species x site interaction (species main effect)
@@ -22,12 +22,12 @@ jpeg(filename = "figures/c13_pooled.jpeg",
      width = 8, height = 6, units = "in", res= 500)
 
 par(mgp=c(2.5,.75,0), mar=c(5,5,1,1), cex.lab=1.25)
-boxplot(c13 ~ uniqueid, data=element,varwidth=TRUE,xaxt='n',
+boxplot(c13 ~ uniqueid, data=alldata,varwidth=TRUE,xaxt='n',
         ylab=c13lab,border=trtcols,ylim=c(-30,-23),xlab="",outline=FALSE,
         boxlwd=2, whisklwd=2,staplelwd=2)
 axis(1, labels=FALSE)
 text(x=1:6, y= par("usr")[3]-.5 , labels = uniqueID_label, xpd=NA, srt=20, adj=.565, cex=1.25)
-stripchart(c13 ~ uniqueid, data=element,
+stripchart(c13 ~ uniqueid, data=alldata,
            vertical = TRUE, method = "jitter",cex=1.25,
            pch = 16,  col= trtcols2, xaxt='n', add=TRUE) 
 legend("topright", legend = c("City", "Park"), lty =1, lwd=4, col=trtcols, inset=.01, 
