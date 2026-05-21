@@ -1,18 +1,21 @@
 source("scripts/functions.R")
 source("scripts/plot_objects.R")
 
-dbh<- read.csv("raw_data/dbh.csv")
+##Step 1: read and prepare the data
+
+dbh<- read.csv("raw_data/dbh_clean.csv")
   dbh$site <- as.factor(dbh$site)
   dbh$species <- as.factor(dbh$species)
   dbh$Date <- as.Date(dbh$date, "%m/%d/%Y")
-  dbh$uniqueID <- paste(dbh$species, dbh$site, sep = "-")
-
-  dbh_agg <- doBy::summaryBy(dbh_mm ~ Date+species+site, data=dbh, 
-                            FUN=c(mean2, se))
+  dbh$replicate <- factor(dbh$replicate)
+  dbh$uniqueID <- paste(dbh$species, dbh$site, dbh$replicate, sep = "-")
   
-  maple <- dbh_agg[dbh_agg$species == "m",]
-  dogwood <- dbh_agg[dbh_agg$species == "d",]
-  hawthorn <- dbh_agg[dbh_agg$species == "h",] 
+dbh <- dbh[order(dbh$uniqueID, dbh$date), ]  
+#make a week variable
+dbh$week <- ave(dbh$dbh_mm, dbh$uniqueID, FUN = seq_along)
+dbh$week_f <- factor(dbh$week)
+  
+
   
 #stats-------
 start <- dbh[dbh$date == "5/24/2022", c("site", "species", "dbh_mm")]
