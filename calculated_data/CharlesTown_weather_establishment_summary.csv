@@ -1,0 +1,2 @@
+"period_start","period_end","n_days","total_precip_mm","trace_precip_days","measurable_precip_days","maximum_drying_interval_days","mean_tavg_C","maximum_tmax_C","minimum_tmin_C","mean_daily_vpd_kPa","maximum_daily_vpd_kPa","hot_days_90F","days_in_sustained_hot_period"
+2022-05-02,2022-07-28,88,350.012,8,39,5,21.3347011784512,33.8888888888889,0.555555555555556,0.8175866809279,2.1654922905364,11,4
