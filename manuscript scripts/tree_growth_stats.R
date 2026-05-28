@@ -1,151 +1,435 @@
-source("scripts/functions.R")
-source("scripts/plot_objects.R")
+# source("scripts/functions.R")
+# source("scripts/plot_objects.R")
 
-##Step 1: read and prepare the data
+##Step: read and prepare the data sets-----
 
-dbh<- read.csv("raw_data/dbh_clean.csv")
-dbh$site <- as.factor(dbh$site)
-dbh$species <- as.factor(dbh$species)
-dbh$date <- as.Date(dbh$date, "%m/%d/%Y")
-dbh$replicate <- factor(dbh$replicate)
-dbh$tree_id  <- paste(dbh$site, dbh$species, dbh$replicate, sep = "-")
-
-dbh <- dbh[order(dbh$tree_id , dbh$date), ]  
-#make a week variable
-dbh$week <- ave(dbh$dbh_mm, dbh$tree_id , FUN = seq_along)
-
-
-##Step 2: calculate change from initial DBH (actual and %)
-
-dbh$initial_dbh <- ave(dbh$dbh_mm, dbh$tree_id, FUN = function(x) x[1])
-dbh$dbh_change_from_initial <- dbh$dbh_mm - dbh$initial_dbh
-dbh$dbh_percent_change <- 100 * (dbh$dbh_mm - dbh$initial_dbh) / dbh$initial_dbh
-
-
-## Step 3: Tree level growth summary
-
-tree_growth <- do.call(rbind, lapply(split(dbh, dbh$tree_id), function(x) {
+dbh_weekly<- read.csv("raw_data/dbh_clean.csv")
+  dbh_weekly$site <- as.factor(dbh_weekly$site)
+  dbh_weekly$species <- as.factor(dbh_weekly$species)
+  dbh_weekly$date <- as.Date(dbh_weekly$date, "%m/%d/%Y")
+  dbh_weekly$replicate <- factor(dbh_weekly$replicate)
+  dbh_weekly$tree_id  <- paste(dbh_weekly$site, dbh_weekly$species, dbh_weekly$replicate, sep = "-")
   
-  x <- x[order(x$date), ]
-  x$days_since_start <- as.numeric(x$date - min(x$date))
-  
-  fit_day <- lm(dbh_mm ~ days_since_start, data = x)
-  fit_week <- lm(dbh_mm ~ week, data = x)
-  
-  data.frame(
-    tree_id = unique(x$tree_id),
-    site = unique(x$site),
-    species = unique(x$species),
-    replicate = unique(x$replicate),
-    initial_dbh_mm = x$dbh_mm[1],
-    final_dbh_mm = x$dbh_mm[nrow(x)],
-    dbh_change_mm = x$dbh_mm[nrow(x)] - x$dbh_mm[1],
-    dbh_percent_change = 100 * (x$dbh_mm[nrow(x)] - x$dbh_mm[1]) / x$dbh_mm[1],
-    dbh_slope_mm_day = coef(fit_day)[2],
-    dbh_slope_mm_week = coef(fit_week)[2]
+  dbh_weekly <- dbh_weekly[order(dbh_weekly$tree_id , dbh_weekly$date), ]  
+    #make a week variable
+  dbh_weekly$week <- ave(dbh_weekly$dbh_mm, dbh_weekly$tree_id , FUN = seq_along)
+  # Create temporary row identifier to preserve the current weekly-data order
+  dbh_weekly$row_id <- seq_len(nrow(dbh_weekly))
+
+#pit sizes data
+tree_metadata <- read.csv("calculated_data/tree_metadata_derived.csv")
+  tree_metadata$site <- factor(tree_metadata$site)
+  tree_metadata$species <- factor(tree_metadata$species)
+  tree_metadata$replicate <- factor(tree_metadata$replicate)
+  tree_metadata$pit_size_class <- factor(
+    tree_metadata$pit_size_class,
+    levels = c("small", "large")
   )
-}))
 
-##Question: Did trees grow more than zero?
+#merge tree growth with pit volume
+  dbh_weekly_pit <- merge(
+  dbh_weekly,
+    tree_metadata[, c(
+      "tree_id",
+      "pit_size_class",
+      "pit_area_m2",
+      "pit_volume_m3"
+    )],
+    by = "tree_id",
+    all.x = TRUE,
+    sort = FALSE
+  )
 
-t.test(tree_growth$dbh_change_mm, mu = 0)
-t.test(tree_growth$dbh_slope_mm_week, mu = 0)
-t.test(tree_growth$dbh_percent_change, mu = 0)
+# Restore original chronological/tree order
+  dbh_weekly_pit <- dbh_weekly_pit[
+  order(dbh_weekly_pit$row_id),]
 
-#Across all trees, stem diameter increased significantly during the 10-week period. 
-#Mean net DBH increase was 2.45 mm, equivalent to about 6.1% relative growth, 
-#and the mean growth slope was 0.234 mm per week.
+# Remove temporary row identifier
+  dbh_weekly_pit$row_id <- NULL
+row.names(dbh_weekly_pit) <- NULL
 
-#Stem growth was first evaluated across all trees by reducing weekly DBH measurements 
-#to individual-tree growth metrics. For each tree, we calculated net DBH change, 
-#percent DBH change, and the slope of DBH over measurement week. 
-#One-sample t-tests were used to determine whether mean growth metrics differed 
-#significantly from zero, indicating measurable stem diameter growth during the study period.
+##Step: create the tree-level growth data set with pit info----
+
+# Calculate each tree's initial DBH
+dbh_weekly_pit$initial_dbh <- ave(
+  dbh_weekly_pit$dbh_mm,
+  dbh_weekly_pit$tree_id,
+  FUN = function(x) x[1]
+)
+
+dbh_weekly_pit$dbh_change_from_initial <-
+  dbh_weekly_pit$dbh_mm - dbh_weekly_pit$initial_dbh
+
+sum(
+  dbh_weekly_pit$week == 1 &
+    dbh_weekly_pit$dbh_change_from_initial == 0
+)
+
+range(dbh_weekly_pit$dbh_change_from_initial)
+
+# Create one-row-per-tree growth dataset
+tree_growth_pit <- do.call(
+  rbind,
+  lapply(split(dbh_weekly_pit, dbh_weekly_pit$tree_id), function(x) {
+    
+    x <- x[order(x$date), ]
+    x$days_since_start <- as.numeric(x$date - min(x$date))
+    
+    fit_day <- lm(dbh_mm ~ days_since_start, data = x)
+    fit_week <- lm(dbh_mm ~ week, data = x)
+    
+    data.frame(
+      tree_id = unique(x$tree_id),
+      site = unique(x$site),
+      species = unique(x$species),
+      replicate = unique(x$replicate),
+      
+      pit_size_class = unique(x$pit_size_class),
+      pit_area_m2 = unique(x$pit_area_m2),
+      pit_volume_m3 = unique(x$pit_volume_m3),
+      
+      initial_dbh_mm = x$dbh_mm[1],
+      final_dbh_mm = x$dbh_mm[nrow(x)],
+      dbh_change_mm = x$dbh_mm[nrow(x)] - x$dbh_mm[1],
+      dbh_percent_change = 
+        100 * (x$dbh_mm[nrow(x)] - x$dbh_mm[1]) / x$dbh_mm[1],
+      dbh_slope_mm_day = coef(fit_day)[2],
+      dbh_slope_mm_week = coef(fit_week)[2]
+    )
+  })
+)
+
+row.names(tree_growth_pit) <- NULL
 
 
-## Question: site × species analysis using the tree-level growth metrics.
-slope_mod <- aov(dbh_slope_mm_week ~ site * species, data = tree_growth)
-summary(slope_mod)
-#site, species, site:species = not significant for growth slope
-  shapiro.test(residuals(slope_mod))
-  fligner.test(dbh_slope_mm_week ~ interaction(site, species),
-  data = tree_growth)
-  tree_growth$rank_slope <- rank(tree_growth$dbh_slope_mm_week)
-  rank_slope_mod <- aov(rank_slope ~ site * species, data = tree_growth)
-  summary(rank_slope_mod)
+##Step: Downtown-only stem growth-analyze pit size influence-----
 
-change_mod <- aov(dbh_change_mm ~ site * species, data = tree_growth)
-summary(change_mod)
-#site, species, site:species = not significant for growth slope
-  shapiro.test(residuals(change_mod))
-  fligner.test(dbh_change_mm ~ interaction(site, species),
-             data = tree_growth)
-  tree_growth$rank_change <- rank(tree_growth$dbh_change_mm)
-  rank_change_mod <- aov(rank_change ~ site * species, data = tree_growth)
-  summary(rank_change_mod)
+city_growth <- subset(tree_growth_pit, site == "c")
 
-percent_mod <- aov(dbh_percent_change ~ site * species, data = tree_growth)
-summary(percent_mod)
-#site, species, site:species = not significant for growth slope
-  shapiro.test(residuals(percent_mod))
-  fligner.test(dbh_percent_change ~ interaction(site, species),
-               data = tree_growth)
-  tree_growth$rank_percent <- rank(tree_growth$dbh_percent_change)
-  rank_percent_mod <- aov(rank_percent ~ site * species, data = tree_growth)
-  summary(rank_percent_mod)
+# Confirm that this is one row per downtown tree
+dim(city_growth)
+length(unique(city_growth$tree_id))
 
-  TukeyHSD(slope_mod, which = "species")
-  TukeyHSD(change_mod, which = "species")
-  TukeyHSD(percent_mod, which = "species")
-  TukeyHSD(rank_slope_mod, which = "species")
-  TukeyHSD(rank_change_mod, which = "species")
-  TukeyHSD(rank_percent_mod, which = "species")
+with(
+  city_growth,
+  table(species, pit_size_class)
+)
 
-#Question: descriptive stats
-growth_summary_stats <- do.call(rbind, lapply(split(tree_growth,
-                                                    list(tree_growth$site,
-                                                         tree_growth$species),
-                                                    drop = TRUE), function(x) {
-                                                      data.frame(
-                                                        site = unique(x$site),
-                                                        species = unique(x$species),
-                                                        n = nrow(x),
-                                                        
-                                                        change_mean = mean(x$dbh_change_mm),
-                                                        change_sd = sd(x$dbh_change_mm),
-                                                        change_se = sd(x$dbh_change_mm) / sqrt(nrow(x)),
-                                                        
-                                                        slope_mean = mean(x$dbh_slope_mm_week),
-                                                        slope_sd = sd(x$dbh_slope_mm_week),
-                                                        slope_se = sd(x$dbh_slope_mm_week) / sqrt(nrow(x)),
-                                                        
-                                                        percent_mean = mean(x$dbh_percent_change),
-                                                        percent_sd = sd(x$dbh_percent_change),
-                                                        percent_se = sd(x$dbh_percent_change) / sqrt(nrow(x))
-                                                      )
-                                                    }))
+# Confirm estimated available soil volumes associated with each class
+unique(
+  city_growth[, c("pit_size_class", "pit_volume_m3")]
+)
 
-row.names(growth_summary_stats) <- NULL
+# Descriptive statistics by pit-size class
+pit_growth_summary <- do.call(
+  rbind,
+  lapply(split(city_growth, city_growth$pit_size_class), function(x) {
+    data.frame(
+      pit_size_class = unique(x$pit_size_class),
+      pit_volume_m3 = unique(x$pit_volume_m3),
+      n = nrow(x),
+      
+      dbh_change_mean = mean(x$dbh_change_mm),
+      dbh_change_sd = sd(x$dbh_change_mm),
+      dbh_change_se = sd(x$dbh_change_mm) / sqrt(nrow(x)),
+      
+      dbh_slope_mean = mean(x$dbh_slope_mm_week),
+      dbh_slope_sd = sd(x$dbh_slope_mm_week),
+      dbh_slope_se = sd(x$dbh_slope_mm_week) / sqrt(nrow(x)),
+      
+      dbh_percent_mean = mean(x$dbh_percent_change),
+      dbh_percent_sd = sd(x$dbh_percent_change),
+      dbh_percent_se = sd(x$dbh_percent_change) / sqrt(nrow(x))
+    )
+  })
+)
 
-growth_summary_stats
+row.names(pit_growth_summary) <- NULL
 
-#Question: did cumulative DBH change through time differently by site or species? repeated measures
+pit_growth_summary
 
-dbh_growth <- subset(dbh, week > 1)
+# Downtown-only pit-size model: primary growth response
 
-dbh_growth$week_f <- factor(dbh_growth$week)
+#growth slope
+city_growth$species <- factor(city_growth$species)
+city_growth$pit_size_class <- factor(
+  city_growth$pit_size_class,
+  levels = c("small", "large")
+)
+
+pit_slope_mod <- lm(
+  dbh_slope_mm_week ~ species + pit_size_class,
+  data = city_growth
+)
+
+summary(pit_slope_mod)
+
+# Partial F-tests for each term, accounting for the other term
+drop1(pit_slope_mod, test = "F")
+
+# Net DBH change
+pit_change_mod <- lm(
+  dbh_change_mm ~ species + pit_size_class,
+  data = city_growth
+)
+
+summary(pit_change_mod)
+drop1(pit_change_mod, test = "F")
+
+
+# Percent DBH change
+pit_percent_mod <- lm(
+  dbh_percent_change ~ species + pit_size_class,
+  data = city_growth
+)
+
+summary(pit_percent_mod)
+drop1(pit_percent_mod, test = "F")
+
+
+#After accounting for species, pit-size class did not significantly influence any growth metric among downtown trees
+# with trees in large pits growing slightly faster, but not significantly so.(+.035 mm/week, +0.407mm, +0.49%)
+#species a stronger predictor (p = .0004)
+
+
+#diagnostic checks for the models
+plot(pit_slope_mod)
+plot(pit_change_mod)
+plot(pit_percent_mod)
+
+shapiro.test(residuals(pit_slope_mod))
+shapiro.test(residuals(pit_change_mod))
+shapiro.test(residuals(pit_percent_mod))
+#no clear normality issue
+
+fligner.test(residuals(pit_slope_mod) ~ city_growth$pit_size_class)
+fligner.test(residuals(pit_change_mod) ~ city_growth$pit_size_class)
+fligner.test(residuals(pit_percent_mod) ~ city_growth$pit_size_class)
+#There is no evidence that residual variance differs between small- and large-pit downtown trees
+
+#we are ok to pool for tree growth
+
+
+##Step: Primary pooled stem-growth analysis-----
+
+#final growth models
+#growth slope model
+pool_slope_mod <- aov(
+  dbh_slope_mm_week ~ site * species,
+  data = tree_growth_pit
+)
+
+pool_change_mod <- aov(
+  dbh_change_mm ~ site * species,
+  data = tree_growth_pit
+)
+
+pool_percent_mod <- aov(
+  dbh_percent_change ~ site * species,
+  data = tree_growth_pit
+)
+
+summary(pool_slope_mod)
+summary(pool_change_mod)
+summary(pool_percent_mod)
+
+#models based on weekly data
+slope_mod <- aov(
+  dbh_slope_mm_week ~ site * species,
+  data = tree_growth_pit)
+
+plot(slope_mod)
+
+# Normality of residuals
+shapiro.test(residuals(slope_mod))
+
+# Homogeneity of residual variance among site x species groups
+growth_group <- interaction(
+  tree_growth_pit$site,
+  tree_growth_pit$species,
+  drop = TRUE
+)
+
+fligner.test(
+  residuals(slope_mod) ~ growth_group
+)
+
+# Influence diagnostics
+cook_threshold <- 4 / nrow(tree_growth_pit)
+cook_threshold
+
+cook_slope <- cooks.distance(slope_mod)
+
+tree_growth_pit[
+  cook_slope > cook_threshold,
+  c(
+    "tree_id",
+    "site",
+    "species",
+    "dbh_slope_mm_week"
+  )
+]
+
+#rank transformed anova because normality was violated (Shapiro)
+
+tree_growth_pit$rank_slope <- rank(
+  tree_growth_pit$dbh_slope_mm_week
+)
+
+rank_slope_mod <- aov(
+  rank_slope ~ site * species,
+  data = tree_growth_pit
+)
+
+summary(rank_slope_mod)
+
+TukeyHSD(
+  rank_slope_mod,
+  which = "species"
+)
+
+#untransformed bioloigically summaries for text
+species_slope_summary <- do.call(
+  rbind,
+  lapply(split(tree_growth_pit, tree_growth_pit$species), function(x) {
+    data.frame(
+      species = unique(x$species),
+      n = nrow(x),
+      slope_mean = mean(x$dbh_slope_mm_week),
+      slope_sd = sd(x$dbh_slope_mm_week),
+      slope_se = sd(x$dbh_slope_mm_week) / sqrt(nrow(x)),
+      slope_median = median(x$dbh_slope_mm_week),
+      slope_min = min(x$dbh_slope_mm_week),
+      slope_max = max(x$dbh_slope_mm_week)
+    )
+  })
+)
+
+row.names(species_slope_summary) <- NULL
+
+species_slope_summary
+
+#growth model
+change_mod <- aov(
+  dbh_change_mm ~ site * species,
+  data = tree_growth_pit
+)
+
+percent_mod <- aov(
+  dbh_percent_change ~ site * species,
+  data = tree_growth_pit
+)
+
+# Diagnostic plots: net DBH change
+plot(change_mod)
+plot(percent_mod)
+
+shapiro.test(residuals(change_mod))
+shapiro.test(residuals(percent_mod))
+
+growth_group <- interaction(
+  tree_growth_pit$site,
+  tree_growth_pit$species,
+  drop = TRUE
+)
+
+fligner.test(residuals(change_mod) ~ growth_group)
+fligner.test(residuals(percent_mod) ~ growth_group)
+
+
+# Influence diagnostics
+cook_threshold <- 4 / nrow(tree_growth_pit)
+
+cook_change <- cooks.distance(change_mod)
+cook_percent <- cooks.distance(percent_mod)
+
+tree_growth_pit[
+  cook_change > cook_threshold,
+  c("tree_id", "site", "species", "dbh_change_mm")
+]
+
+tree_growth_pit[
+  cook_percent > cook_threshold,
+  c("tree_id", "site", "species", "dbh_percent_change")
+]
+
+
+#rank transformed anova because normality was violated (Shapiro) for both models
+tree_growth_pit$rank_change <- rank(
+  tree_growth_pit$dbh_change_mm
+)
+
+tree_growth_pit$rank_percent <- rank(
+  tree_growth_pit$dbh_percent_change
+)
+
+rank_change_mod <- aov(
+  rank_change ~ site * species,
+  data = tree_growth_pit
+)
+
+rank_percent_mod <- aov(
+  rank_percent ~ site * species,
+  data = tree_growth_pit
+)
+
+summary(rank_change_mod)
+summary(rank_percent_mod)
+
+
+TukeyHSD(
+  rank_change_mod,
+  which = "species"
+)
+
+TukeyHSD(
+  rank_percent_mod,
+  which = "species"
+)
+
+#untransformed bioloigically summaries for text
+species_growth_summary <- do.call(
+  rbind,
+  lapply(split(tree_growth_pit, tree_growth_pit$species), function(x) {
+    data.frame(
+      species = unique(x$species),
+      n = nrow(x),
+      
+      change_mean = mean(x$dbh_change_mm),
+      change_sd = sd(x$dbh_change_mm),
+      change_se = sd(x$dbh_change_mm) / sqrt(nrow(x)),
+      change_median = median(x$dbh_change_mm),
+      
+      percent_mean = mean(x$dbh_percent_change),
+      percent_sd = sd(x$dbh_percent_change),
+      percent_se = sd(x$dbh_percent_change) / sqrt(nrow(x)),
+      percent_median = median(x$dbh_percent_change)
+    )
+  })
+)
+
+row.names(species_growth_summary) <- NULL
+
+species_growth_summary
+
+
+# # week_f	Did DBH change accumulate over time?	yes, strongly
+# # site:week_f	Did growth trajectory differ between sites?	no
+# # species:week_f	Did species differ in growth trajectory?	Yes (after data transformation)
+# # site:species:week_f	Did species respond differently through time depending on site? NO
+
+##Step: Repeated-measures analysis of cumulative DBH trajectory
+
+dbh_trajectory <- subset(dbh_weekly_pit, week > 1)
+
+dbh_trajectory$week_f <- factor(dbh_trajectory$week)
 
 rm_growth <- aov(
   dbh_change_from_initial ~ site * species * week_f +
     Error(tree_id / week_f),
-  data = dbh_growth
+  data = dbh_trajectory
 )
 
 summary(rm_growth)
-
-# week_f	Did DBH change accumulate over time?	yes, strongly
-# site:week_f	Did growth trajectory differ between sites?	no
-# species:week_f	Did species differ in growth trajectory?	NO
-# site:species:week_f	Did species respond differently through time depending on site? NO
-
-
+#yes, trees grew weekly but not site or species differences. 
+#Week	F₈,₁₉₂ = 17.89 p	< 0.001	cumulative DBH growth increased through time

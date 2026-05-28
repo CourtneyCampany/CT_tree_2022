@@ -7,7 +7,7 @@ pit_sizes$pit_size_class <- factor(pit_sizes$pit_size_class)
 
 pit_sizes$tree_id <- with(
   pit_sizes,
-  paste(site, species, replicate, sep = "_")
+  paste(site, species, replicate, sep = "-")
 )
 
 pit_sizes$pit_area_m2 <- with(
@@ -22,24 +22,42 @@ pit_sizes$pit_volume_m3 <- with(
     (pit_depth_cm / 100)
 )
 
-str(pit_sizes)
 
-unique(
-  subset(
-    pit_sizes,
-    site == "c",
-    select = c(
-      pit_size_class,
-      pit_length_cm,
-      pit_width_cm,
-      pit_depth_cm,
-      pit_area_m2,
-      pit_volume_m3
-    )
-  )
+#create a derived dataset for further use (w/area and volume)
+
+tree_metadata <- pit_sizes
+
+tree_metadata$pit_area_m2 <- with(
+  tree_metadata,
+  (pit_length_cm / 100) * (pit_width_cm / 100)
 )
 
-with(
-  subset(pit_sizes, site == "c"),
-  table(species, pit_size_class)
+tree_metadata$pit_volume_m3 <- with(
+  tree_metadata,
+  (pit_length_cm / 100) *
+    (pit_width_cm / 100) *
+    (pit_depth_cm / 100)
+)
+
+
+# Reorder columns for readability
+tree_metadata <- tree_metadata[, c(
+  "tree_id",
+  "site",
+  "species",
+  "replicate",
+  "pit_size_class",
+  "pit_length_cm",
+  "pit_width_cm",
+  "pit_depth_cm",
+  "pit_area_m2",
+  "pit_volume_m3"
+)]
+
+# Save the reusable derived metadata file
+write.csv(
+  tree_metadata,
+  "calculated_data/tree_metadata_derived.csv",
+  row.names = FALSE,
+  na = "NA"
 )
