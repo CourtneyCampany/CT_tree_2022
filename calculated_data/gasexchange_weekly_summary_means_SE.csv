@@ -1,0 +1,241 @@
+response,species,site,week,n,mean,se
+"Photosynthesis, A",Dogwood,Park,1,5,8.145029579,0.7395642005423697
+"Photosynthesis, A",Dogwood,Park,2,5,6.7277355292,1.096294997245334
+"Photosynthesis, A",Dogwood,Park,3,5,6.7470273465999995,1.1781531926214033
+"Photosynthesis, A",Dogwood,Park,4,5,5.744406382,0.856238430074879
+"Photosynthesis, A",Dogwood,Park,5,5,9.7701729608,3.179408154505143
+"Photosynthesis, A",Dogwood,Park,6,5,7.471263453,0.7628713663579137
+"Photosynthesis, A",Dogwood,Park,7,5,5.4651309942,0.6189252769048857
+"Photosynthesis, A",Dogwood,Park,8,5,9.905209620599999,2.0591865139126284
+"Photosynthesis, A",Dogwood,Park,9,5,7.9710073676,0.5524179389293878
+"Photosynthesis, A",Dogwood,Park,10,5,10.4343568376,1.0229233003494345
+"Photosynthesis, A",Dogwood,Downtown,1,5,8.7785408508,1.0003435884039016
+"Photosynthesis, A",Dogwood,Downtown,2,5,6.8511267392,0.5708037982270298
+"Photosynthesis, A",Dogwood,Downtown,3,5,5.773774745,0.6933721953749985
+"Photosynthesis, A",Dogwood,Downtown,4,5,5.1932633807999995,0.8908718894439785
+"Photosynthesis, A",Dogwood,Downtown,5,5,6.613216162,0.5405500428217607
+"Photosynthesis, A",Dogwood,Downtown,6,5,5.0752515108,0.6409221051385146
+"Photosynthesis, A",Dogwood,Downtown,7,5,5.2379139536,0.7108204741676363
+"Photosynthesis, A",Dogwood,Downtown,8,5,10.5589171332,1.895579255479663
+"Photosynthesis, A",Dogwood,Downtown,9,5,6.7680145442,0.38616254193754534
+"Photosynthesis, A",Dogwood,Downtown,10,5,6.8731744534,0.8345280053648847
+"Photosynthesis, A",Hawthorn,Park,1,5,14.81365055,1.2237655718161018
+"Photosynthesis, A",Hawthorn,Park,2,5,9.2038497894,1.1881141601734981
+"Photosynthesis, A",Hawthorn,Park,3,5,15.631841035999999,1.8423149211933705
+"Photosynthesis, A",Hawthorn,Park,4,5,8.8144482474,2.4701252815881376
+"Photosynthesis, A",Hawthorn,Park,5,5,16.868535482,1.1793149246440182
+"Photosynthesis, A",Hawthorn,Park,6,5,13.5839041368,1.1394339323215417
+"Photosynthesis, A",Hawthorn,Park,7,5,15.651440862,3.099014641265119
+"Photosynthesis, A",Hawthorn,Park,8,5,15.64399392,0.6069391820465445
+"Photosynthesis, A",Hawthorn,Park,9,5,12.684701290400001,4.199511735712241
+"Photosynthesis, A",Hawthorn,Park,10,5,14.7006814338,2.1388865252317886
+"Photosynthesis, A",Hawthorn,Downtown,1,5,14.174319382,0.6992177835462055
+"Photosynthesis, A",Hawthorn,Downtown,2,5,16.285748804,1.0424460536543867
+"Photosynthesis, A",Hawthorn,Downtown,3,5,13.758796334,0.6519187435319986
+"Photosynthesis, A",Hawthorn,Downtown,4,5,13.7816497512,1.699667511037894
+"Photosynthesis, A",Hawthorn,Downtown,5,5,11.1952094348,1.1183872902820873
+"Photosynthesis, A",Hawthorn,Downtown,6,5,14.5366633944,2.440924456153777
+"Photosynthesis, A",Hawthorn,Downtown,7,5,13.571072284,1.6154227548947806
+"Photosynthesis, A",Hawthorn,Downtown,8,5,13.61063719,1.379354556873573
+"Photosynthesis, A",Hawthorn,Downtown,9,5,20.82088498,1.7347276050439624
+"Photosynthesis, A",Hawthorn,Downtown,10,5,15.4249296742,2.046788783795
+"Photosynthesis, A",Maple,Park,1,5,12.1962554978,1.2283707225772356
+"Photosynthesis, A",Maple,Park,2,5,10.1222662384,2.0477249252938923
+"Photosynthesis, A",Maple,Park,3,5,10.4848383086,2.0948128321808044
+"Photosynthesis, A",Maple,Park,4,5,8.0993879692,1.8258104801417692
+"Photosynthesis, A",Maple,Park,5,5,10.2073880438,1.282082552105599
+"Photosynthesis, A",Maple,Park,6,5,12.614695806,0.830853291074287
+"Photosynthesis, A",Maple,Park,7,5,10.5509588252,1.2256006197767304
+"Photosynthesis, A",Maple,Park,8,5,11.7002954808,1.0842677675968921
+"Photosynthesis, A",Maple,Park,9,5,13.926958312,1.2222250851710115
+"Photosynthesis, A",Maple,Park,10,5,11.726470921999999,0.5141249523161031
+"Photosynthesis, A",Maple,Downtown,1,5,13.8410076398,1.834455838772327
+"Photosynthesis, A",Maple,Downtown,2,5,14.3899548,1.3287869839540898
+"Photosynthesis, A",Maple,Downtown,3,5,10.8573905534,2.1327404978407953
+"Photosynthesis, A",Maple,Downtown,4,5,10.9379736258,1.5336751685850962
+"Photosynthesis, A",Maple,Downtown,5,5,10.64956186,1.0296588827345847
+"Photosynthesis, A",Maple,Downtown,6,5,15.28769601,0.7572764140466149
+"Photosynthesis, A",Maple,Downtown,7,5,11.845562951,2.3901551235993104
+"Photosynthesis, A",Maple,Downtown,8,5,12.5728200146,1.60773325142023
+"Photosynthesis, A",Maple,Downtown,9,5,13.5509418846,2.0813599924747117
+"Photosynthesis, A",Maple,Downtown,10,5,7.2101250176,1.3386201281063586
+"Stomatal conductance, gsw",Dogwood,Park,1,5,0.1263797142,0.03887800428998765
+"Stomatal conductance, gsw",Dogwood,Park,2,5,0.0874208062,0.012024310318965689
+"Stomatal conductance, gsw",Dogwood,Park,3,5,0.0852097688,0.018342984710697896
+"Stomatal conductance, gsw",Dogwood,Park,4,5,0.07892810119999999,0.014552167764991063
+"Stomatal conductance, gsw",Dogwood,Park,5,5,0.153954079,0.04709190479384653
+"Stomatal conductance, gsw",Dogwood,Park,6,5,0.0941452332,0.013631459531288932
+"Stomatal conductance, gsw",Dogwood,Park,7,5,0.0775408924,0.012990326956871256
+"Stomatal conductance, gsw",Dogwood,Park,8,5,0.20039601740000001,0.06787579001547885
+"Stomatal conductance, gsw",Dogwood,Park,9,5,0.0932796744,0.009160217233325394
+"Stomatal conductance, gsw",Dogwood,Park,10,5,0.1728647898,0.01901371240289003
+"Stomatal conductance, gsw",Dogwood,Downtown,1,5,0.0919239282,0.012309855205339934
+"Stomatal conductance, gsw",Dogwood,Downtown,2,5,0.07669781419999999,0.011530841893491711
+"Stomatal conductance, gsw",Dogwood,Downtown,3,5,0.0637085132,0.013244985912335408
+"Stomatal conductance, gsw",Dogwood,Downtown,4,5,0.0617124676,0.014154601605442237
+"Stomatal conductance, gsw",Dogwood,Downtown,5,5,0.0679493694,0.004398811431862561
+"Stomatal conductance, gsw",Dogwood,Downtown,6,5,0.06718721999999999,0.007956680173723729
+"Stomatal conductance, gsw",Dogwood,Downtown,7,5,0.0621266488,0.010340341354553235
+"Stomatal conductance, gsw",Dogwood,Downtown,8,5,0.1460745634,0.030391934355900114
+"Stomatal conductance, gsw",Dogwood,Downtown,9,5,0.0718164898,0.004098636468117321
+"Stomatal conductance, gsw",Dogwood,Downtown,10,5,0.1696008052,0.01909345794694301
+"Stomatal conductance, gsw",Hawthorn,Park,1,5,0.2068616326,0.025731720585547138
+"Stomatal conductance, gsw",Hawthorn,Park,2,5,0.0816642572,0.012319388947917129
+"Stomatal conductance, gsw",Hawthorn,Park,3,5,0.1814697858,0.030396590025945715
+"Stomatal conductance, gsw",Hawthorn,Park,4,5,0.1044227012,0.02687476347152252
+"Stomatal conductance, gsw",Hawthorn,Park,5,5,0.241872698,0.029922602969270518
+"Stomatal conductance, gsw",Hawthorn,Park,6,5,0.1750909124,0.025632541537308064
+"Stomatal conductance, gsw",Hawthorn,Park,7,5,0.2488384002,0.04900756431880125
+"Stomatal conductance, gsw",Hawthorn,Park,8,5,0.304286255,0.024026320268034685
+"Stomatal conductance, gsw",Hawthorn,Park,9,5,0.1938823004,0.07129757739404463
+"Stomatal conductance, gsw",Hawthorn,Park,10,5,0.2317642692,0.03372805950160245
+"Stomatal conductance, gsw",Hawthorn,Downtown,1,5,0.2115042104,0.02172789014396103
+"Stomatal conductance, gsw",Hawthorn,Downtown,2,5,0.2357845798,0.027190430182093578
+"Stomatal conductance, gsw",Hawthorn,Downtown,3,5,0.160510087,0.011764876989037826
+"Stomatal conductance, gsw",Hawthorn,Downtown,4,5,0.2176957218,0.03332165145127554
+"Stomatal conductance, gsw",Hawthorn,Downtown,5,5,0.1228417044,0.019177862256210928
+"Stomatal conductance, gsw",Hawthorn,Downtown,6,5,0.2165564648,0.05299877534332123
+"Stomatal conductance, gsw",Hawthorn,Downtown,7,5,0.1655900486,0.03451821558023145
+"Stomatal conductance, gsw",Hawthorn,Downtown,8,5,0.306085614,0.03733399723596048
+"Stomatal conductance, gsw",Hawthorn,Downtown,9,5,0.3596143168,0.042436519166293624
+"Stomatal conductance, gsw",Hawthorn,Downtown,10,5,0.387346246,0.04719244382298468
+"Stomatal conductance, gsw",Maple,Park,1,5,0.1429620672,0.016190148204174575
+"Stomatal conductance, gsw",Maple,Park,2,5,0.1100203652,0.02855060906274266
+"Stomatal conductance, gsw",Maple,Park,3,5,0.1053410122,0.02141291929342284
+"Stomatal conductance, gsw",Maple,Park,4,5,0.0864159248,0.023752215397811804
+"Stomatal conductance, gsw",Maple,Park,5,5,0.123075009,0.015597943772500605
+"Stomatal conductance, gsw",Maple,Park,6,5,0.1445212774,0.01585016244494066
+"Stomatal conductance, gsw",Maple,Park,7,5,0.1193175992,0.018303355353526653
+"Stomatal conductance, gsw",Maple,Park,8,5,0.1486179986,0.021734481856039937
+"Stomatal conductance, gsw",Maple,Park,9,5,0.1670216064,0.02731880546016211
+"Stomatal conductance, gsw",Maple,Park,10,5,0.1568115014,0.0060268578707457976
+"Stomatal conductance, gsw",Maple,Downtown,1,5,0.1664607176,0.02677977316138911
+"Stomatal conductance, gsw",Maple,Downtown,2,5,0.1783534876,0.021063926770730625
+"Stomatal conductance, gsw",Maple,Downtown,3,5,0.1150370434,0.026366454123338684
+"Stomatal conductance, gsw",Maple,Downtown,4,5,0.1610968654,0.02842155630586109
+"Stomatal conductance, gsw",Maple,Downtown,5,5,0.1277434912,0.017433213374839003
+"Stomatal conductance, gsw",Maple,Downtown,6,5,0.2163745202,0.013974448053175697
+"Stomatal conductance, gsw",Maple,Downtown,7,5,0.1536838508,0.048610365308857546
+"Stomatal conductance, gsw",Maple,Downtown,8,5,0.2076429408,0.037788018557876495
+"Stomatal conductance, gsw",Maple,Downtown,9,5,0.19826281739999999,0.0367166719181607
+"Stomatal conductance, gsw",Maple,Downtown,10,5,0.1559851992,0.022089026493555756
+"Transpiration, E",Dogwood,Park,1,5,2.560848023,0.7033987102197438
+"Transpiration, E",Dogwood,Park,2,5,2.0703511372,0.26500043927380423
+"Transpiration, E",Dogwood,Park,3,5,1.8962027674000002,0.36764812759745674
+"Transpiration, E",Dogwood,Park,4,5,1.8548405942,0.30842498182037265
+"Transpiration, E",Dogwood,Park,5,5,3.3017554176,0.9129145491787585
+"Transpiration, E",Dogwood,Park,6,5,2.0462620858,0.28541304067790957
+"Transpiration, E",Dogwood,Park,7,5,1.7804149474,0.2568993779224748
+"Transpiration, E",Dogwood,Park,8,5,4.048492888,1.0630390912970042
+"Transpiration, E",Dogwood,Park,9,5,2.0943819898,0.16923387719529995
+"Transpiration, E",Dogwood,Park,10,5,3.6459984456,0.3264288486902764
+"Transpiration, E",Dogwood,Downtown,1,5,1.9347291158,0.21407940633872383
+"Transpiration, E",Dogwood,Downtown,2,5,1.7331791666,0.2279377706535278
+"Transpiration, E",Dogwood,Downtown,3,5,1.4764170314,0.2888760122996955
+"Transpiration, E",Dogwood,Downtown,4,5,1.4785169197999999,0.32126572657603947
+"Transpiration, E",Dogwood,Downtown,5,5,1.5162906128,0.10314580925128504
+"Transpiration, E",Dogwood,Downtown,6,5,1.492534848,0.19112591762851514
+"Transpiration, E",Dogwood,Downtown,7,5,1.4421666986,0.24750434657948464
+"Transpiration, E",Dogwood,Downtown,8,5,3.1485587942,0.5911152352432049
+"Transpiration, E",Dogwood,Downtown,9,5,1.6849706832,0.0811285284101218
+"Transpiration, E",Dogwood,Downtown,10,5,3.530715536,0.4203424976897019
+"Transpiration, E",Hawthorn,Park,1,5,4.1986479884,0.45388049151056803
+"Transpiration, E",Hawthorn,Park,2,5,1.8615867756,0.2681648168767047
+"Transpiration, E",Hawthorn,Park,3,5,3.8143205386,0.6092417573988018
+"Transpiration, E",Hawthorn,Park,4,5,2.4526050381999998,0.6073014634450062
+"Transpiration, E",Hawthorn,Park,5,5,4.9947687722000005,0.5678180513403939
+"Transpiration, E",Hawthorn,Park,6,5,3.5793114502,0.4903679949822388
+"Transpiration, E",Hawthorn,Park,7,5,5.271950422,0.9700133810471742
+"Transpiration, E",Hawthorn,Park,8,5,6.011194217,0.3946967254996831
+"Transpiration, E",Hawthorn,Park,9,5,3.8350344414,1.3046462819188176
+"Transpiration, E",Hawthorn,Park,10,5,4.705632003,0.6605910591451419
+"Transpiration, E",Hawthorn,Downtown,1,5,4.001440535,0.3680116340737465
+"Transpiration, E",Hawthorn,Downtown,2,5,4.7797326924,0.45919644172453983
+"Transpiration, E",Hawthorn,Downtown,3,5,3.4832091656,0.23509198950832527
+"Transpiration, E",Hawthorn,Downtown,4,5,4.6495990848,0.638794067916942
+"Transpiration, E",Hawthorn,Downtown,5,5,2.6066536422,0.4185256487764136
+"Transpiration, E",Hawthorn,Downtown,6,5,4.4138702452,0.9687897793937973
+"Transpiration, E",Hawthorn,Downtown,7,5,3.5966782378,0.6651165971154388
+"Transpiration, E",Hawthorn,Downtown,8,5,6.0050145974,0.62236973916997
+"Transpiration, E",Hawthorn,Downtown,9,5,7.0478304042,0.733353712594352
+"Transpiration, E",Hawthorn,Downtown,10,5,7.426608846,0.8369265143578316
+"Transpiration, E",Maple,Park,1,5,3.0846209332,0.323970509140868
+"Transpiration, E",Maple,Park,2,5,2.4522289508,0.5985632403573078
+"Transpiration, E",Maple,Park,3,5,2.298510666,0.4504671996849708
+"Transpiration, E",Maple,Park,4,5,2.0370762264,0.5532573316616547
+"Transpiration, E",Maple,Park,5,5,2.7276159486,0.3233920041590306
+"Transpiration, E",Maple,Park,6,5,3.1086144106,0.31409661728214683
+"Transpiration, E",Maple,Park,7,5,2.6605390024,0.3774092837137864
+"Transpiration, E",Maple,Park,8,5,3.1861939352,0.3998671594771298
+"Transpiration, E",Maple,Park,9,5,3.6977931928,0.5419571139159157
+"Transpiration, E",Maple,Park,10,5,3.3030763172,0.11411537892943605
+"Transpiration, E",Maple,Downtown,1,5,3.3421772558,0.42399628137668066
+"Transpiration, E",Maple,Downtown,2,5,3.8490810250000003,0.40969377597427686
+"Transpiration, E",Maple,Downtown,3,5,2.5207038136,0.553529659852478
+"Transpiration, E",Maple,Downtown,4,5,3.594684475,0.5919788168914379
+"Transpiration, E",Maple,Downtown,5,5,2.722760593,0.3367495367864171
+"Transpiration, E",Maple,Downtown,6,5,4.4819750022,0.2644146248535616
+"Transpiration, E",Maple,Downtown,7,5,3.3169001688,0.9660425188061587
+"Transpiration, E",Maple,Downtown,8,5,4.3505794066,0.693936295895797
+"Transpiration, E",Maple,Downtown,9,5,4.218251168,0.7323255984723444
+"Transpiration, E",Maple,Downtown,10,5,3.3125104685999998,0.4994467987311623
+"Intrinsic water-use efficiency, iWUE",Dogwood,Park,1,5,77.29330778694862,11.84001948777788
+"Intrinsic water-use efficiency, iWUE",Dogwood,Park,2,5,76.55701587555043,6.1255585222961395
+"Intrinsic water-use efficiency, iWUE",Dogwood,Park,3,5,81.50175113703509,5.218344211252308
+"Intrinsic water-use efficiency, iWUE",Dogwood,Park,4,5,74.58185378795079,3.589891636707009
+"Intrinsic water-use efficiency, iWUE",Dogwood,Park,5,5,61.53928122509482,4.6808040956272725
+"Intrinsic water-use efficiency, iWUE",Dogwood,Park,6,5,81.92819391497275,5.0771819327444625
+"Intrinsic water-use efficiency, iWUE",Dogwood,Park,7,5,74.54287588741923,8.86682271117545
+"Intrinsic water-use efficiency, iWUE",Dogwood,Park,8,5,55.882301794038675,6.816840585225918
+"Intrinsic water-use efficiency, iWUE",Dogwood,Park,9,5,86.69077772351223,4.216087183622788
+"Intrinsic water-use efficiency, iWUE",Dogwood,Park,10,5,60.78591857632958,1.053938171924736
+"Intrinsic water-use efficiency, iWUE",Dogwood,Downtown,1,5,96.64260900722164,5.1701574407902955
+"Intrinsic water-use efficiency, iWUE",Dogwood,Downtown,2,5,94.07135203974609,8.492753374075884
+"Intrinsic water-use efficiency, iWUE",Dogwood,Downtown,3,5,97.31422548003178,8.802973018949292
+"Intrinsic water-use efficiency, iWUE",Dogwood,Downtown,4,5,88.70048282779238,7.636774823431471
+"Intrinsic water-use efficiency, iWUE",Dogwood,Downtown,5,5,97.96675695104453,6.904448431072624
+"Intrinsic water-use efficiency, iWUE",Dogwood,Downtown,6,5,76.72240031374237,7.483341678110935
+"Intrinsic water-use efficiency, iWUE",Dogwood,Downtown,7,5,86.60600973848292,6.114115699177322
+"Intrinsic water-use efficiency, iWUE",Dogwood,Downtown,8,5,74.54806592851097,3.3266695470655745
+"Intrinsic water-use efficiency, iWUE",Dogwood,Downtown,9,5,94.29763538069201,1.81212862600935
+"Intrinsic water-use efficiency, iWUE",Dogwood,Downtown,10,5,42.93357800752249,6.7038147997876205
+"Intrinsic water-use efficiency, iWUE",Hawthorn,Park,1,5,73.39645252402576,4.9766663251773124
+"Intrinsic water-use efficiency, iWUE",Hawthorn,Park,2,5,115.93514296293802,8.799444293609783
+"Intrinsic water-use efficiency, iWUE",Hawthorn,Park,3,5,90.4336535414804,8.601684394030428
+"Intrinsic water-use efficiency, iWUE",Hawthorn,Park,4,5,88.05948773890448,9.538756097254002
+"Intrinsic water-use efficiency, iWUE",Hawthorn,Park,5,5,72.51949355847113,6.149515898747035
+"Intrinsic water-use efficiency, iWUE",Hawthorn,Park,6,5,81.34710213705618,6.780141456242518
+"Intrinsic water-use efficiency, iWUE",Hawthorn,Park,7,5,63.61706990299595,3.6066538323673747
+"Intrinsic water-use efficiency, iWUE",Hawthorn,Park,8,5,52.13417760570527,2.4703023169450566
+"Intrinsic water-use efficiency, iWUE",Hawthorn,Park,9,5,71.309658270891,13.113934957579781
+"Intrinsic water-use efficiency, iWUE",Hawthorn,Park,10,5,63.4581972059828,1.1203367187990008
+"Intrinsic water-use efficiency, iWUE",Hawthorn,Downtown,1,5,70.61447455348014,9.098122117599235
+"Intrinsic water-use efficiency, iWUE",Hawthorn,Downtown,2,5,71.12467816085204,4.6040661498694835
+"Intrinsic water-use efficiency, iWUE",Hawthorn,Downtown,3,5,86.6502510783295,4.058937976841198
+"Intrinsic water-use efficiency, iWUE",Hawthorn,Downtown,4,5,64.7141818180156,4.1233722292588775
+"Intrinsic water-use efficiency, iWUE",Hawthorn,Downtown,5,5,94.63614210525758,6.4289127439478735
+"Intrinsic water-use efficiency, iWUE",Hawthorn,Downtown,6,5,73.18830676199057,8.488766581078265
+"Intrinsic water-use efficiency, iWUE",Hawthorn,Downtown,7,5,87.84668972786291,7.3325781183903365
+"Intrinsic water-use efficiency, iWUE",Hawthorn,Downtown,8,5,44.99738094840919,1.8935580367992395
+"Intrinsic water-use efficiency, iWUE",Hawthorn,Downtown,9,5,59.41832839757872,3.2285541134709352
+"Intrinsic water-use efficiency, iWUE",Hawthorn,Downtown,10,5,40.142857810958816,3.7300045545779867
+"Intrinsic water-use efficiency, iWUE",Maple,Park,1,5,86.1428127214857,2.9308268246311697
+"Intrinsic water-use efficiency, iWUE",Maple,Park,2,5,102.19179609075638,10.228387164353396
+"Intrinsic water-use efficiency, iWUE",Maple,Park,3,5,98.37244871635816,7.023486358618921
+"Intrinsic water-use efficiency, iWUE",Maple,Park,4,5,98.34118341689557,6.703838240516174
+"Intrinsic water-use efficiency, iWUE",Maple,Park,5,5,83.03915429839503,2.70336809071743
+"Intrinsic water-use efficiency, iWUE",Maple,Park,6,5,89.80314252889328,7.470608976997098
+"Intrinsic water-use efficiency, iWUE",Maple,Park,7,5,91.13425250240188,5.253278782283728
+"Intrinsic water-use efficiency, iWUE",Maple,Park,8,5,80.71282879484174,3.604285745866388
+"Intrinsic water-use efficiency, iWUE",Maple,Park,9,5,88.14965360363861,8.077512717120676
+"Intrinsic water-use efficiency, iWUE",Maple,Park,10,5,74.77690768185221,1.6185012101238594
+"Intrinsic water-use efficiency, iWUE",Maple,Downtown,1,5,84.81691814094877,3.00261810135326
+"Intrinsic water-use efficiency, iWUE",Maple,Downtown,2,5,81.64779507358215,2.982334018305308
+"Intrinsic water-use efficiency, iWUE",Maple,Downtown,3,5,98.25172051777965,4.999525701544227
+"Intrinsic water-use efficiency, iWUE",Maple,Downtown,4,5,71.83367452383466,6.139683328905671
+"Intrinsic water-use efficiency, iWUE",Maple,Downtown,5,5,87.25602679309277,8.447353100989362
+"Intrinsic water-use efficiency, iWUE",Maple,Downtown,6,5,71.1115601841411,2.971118821430831
+"Intrinsic water-use efficiency, iWUE",Maple,Downtown,7,5,91.97464743075717,11.982153358012111
+"Intrinsic water-use efficiency, iWUE",Maple,Downtown,8,5,64.55925757049846,6.032197079524744
+"Intrinsic water-use efficiency, iWUE",Maple,Downtown,9,5,70.49452155369457,3.743675704237039
+"Intrinsic water-use efficiency, iWUE",Maple,Downtown,10,5,46.814443279717565,8.255009961291757

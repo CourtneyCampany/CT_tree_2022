@@ -1,0 +1,29 @@
+response,effect,df,F_report,p_report
+Photosynthesis (A),Site,1,0.20,0.658
+Photosynthesis (A),Species,2,41.77,<0.001
+Photosynthesis (A),Site × Species,2,1.16,0.331
+Photosynthesis (A),Week,9,3.60,<0.001
+Photosynthesis (A),Site × Week,9,3.15,0.001
+Photosynthesis (A),Species × Week,18,1.64,0.053
+Photosynthesis (A),Site × Species × Week,18,1.73,0.036
+Stomatal conductance (sqrt gsw),Site,1,1.25,0.275
+Stomatal conductance (sqrt gsw),Species,2,27.21,<0.001
+Stomatal conductance (sqrt gsw),Site × Species,2,3.54,0.045
+Stomatal conductance (sqrt gsw),Week,9,12.28,<0.001
+Stomatal conductance (sqrt gsw),Site × Week,9,4.44,<0.001
+Stomatal conductance (sqrt gsw),Species × Week,18,1.92,0.016
+Stomatal conductance (sqrt gsw),Site × Species × Week,18,2.03,0.010
+Transpiration (sqrt E),Site,1,0.97,0.335
+Transpiration (sqrt E),Species,2,26.80,<0.001
+Transpiration (sqrt E),Site × Species,2,3.58,0.044
+Transpiration (sqrt E),Week,9,11.17,<0.001
+Transpiration (sqrt E),Site × Week,9,4.67,<0.001
+Transpiration (sqrt E),Species × Week,18,2.00,0.011
+Transpiration (sqrt E),Site × Species × Week,18,2.06,0.008
+Intrinsic WUE (iWUE),Site,1,1.07,0.312
+Intrinsic WUE (iWUE),Species,2,4.37,0.024
+Intrinsic WUE (iWUE),Site × Species,2,7.49,0.003
+Intrinsic WUE (iWUE),Week,9,23.32,<0.001
+Intrinsic WUE (iWUE),Site × Week,9,8.00,<0.001
+Intrinsic WUE (iWUE),Species × Week,18,1.98,0.012
+Intrinsic WUE (iWUE),Site × Species × Week,18,1.73,0.036
