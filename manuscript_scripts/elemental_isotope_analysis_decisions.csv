@@ -1,0 +1,5 @@
+"trait","variable","primary_model_object","model_scale","figure_scale","diagnostic_decision","interpretation_focus"
+"Foliar nitrogen","nitro_perc","aov_log_N_complete","log(nitro_perc)","original %N","Log transformation improved residual normality and reduced heterogeneity","site, species, week, site x week, species x week"
+"Foliar C/N","CN_ratio","aov_log_CN_complete","log(CN_ratio)","original C/N","Log transformation produced acceptable diagnostics","site, species, week, site x week, species x week"
+"Carbon isotope composition","c13","aov_c13_complete","original c13 scale","original c13","Retained original isotope scale; diagnostics imperfect but Cook's distances low","species, week, site x week with weak corrected site follow-ups"
+"Foliar carbon","carbon_perc","not modeled as primary response","descriptive/QC only","not emphasized","Used to calculate C/N ratio; not emphasized as standalone response","supporting variable only"
