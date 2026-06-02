@@ -1,0 +1,8 @@
+trait,response,units,analysis,error_stratum,term,df,sum_sq,mean_sq,f_value,p_value,significance
+Midmorning ground temperature,ground_temp_C,°C,Primary site × species × week repeated-measures ANOVA,Error: tree_id,site,1,64.70227201646145,64.70227201646145,1.557776710471216,0.22403091854725207,
+Midmorning ground temperature,ground_temp_C,°C,Primary site × species × week repeated-measures ANOVA,Error: tree_id,species,2,9.950840329218416,4.975420164609208,0.11978858571249544,0.8876350081563443,
+Midmorning ground temperature,ground_temp_C,°C,Primary site × species × week repeated-measures ANOVA,Error: tree_id,site:species,2,14.060010699590084,7.030005349795042,0.16925493135098238,0.8452926306659417,
+Midmorning ground temperature,ground_temp_C,°C,Primary site × species × week repeated-measures ANOVA,Error: tree_id:week_f,week_f,9,3511.9426259259208,390.2158473251023,67.54512272618047,6.786657695470987e-58,***
+Midmorning ground temperature,ground_temp_C,°C,Primary site × species × week repeated-measures ANOVA,Error: tree_id:week_f,site:week_f,9,791.0924234567914,87.89915816186571,15.215064857744526,4.321317248735757e-19,***
+Midmorning ground temperature,ground_temp_C,°C,Primary site × species × week repeated-measures ANOVA,Error: tree_id:week_f,species:week_f,18,72.63200740740686,4.035111522633715,0.6984649774693713,0.8109533389722636,
+Midmorning ground temperature,ground_temp_C,°C,Primary site × species × week repeated-measures ANOVA,Error: tree_id:week_f,site:species:week_f,18,52.64456543209803,2.9246980795610016,0.5062559403344458,0.9536006266965003,
