@@ -1,6 +1,6 @@
 library(tidyverse)
 
-##SteP: Read, wrangle, and summarize isotope data-----
+##SteP: Read, wrangle, and summarize elemental/isotope data-----
 isotope_data <- read.csv("raw_data/isotope_data.csv")
 
 isotope_data <- isotope_data %>%
@@ -86,18 +86,12 @@ ggplot(trait_long, aes(sample = value)) +
   facet_wrap(~ trait, scales = "free") +
   theme_classic()
 
-# Boxplots by site and species
-ggplot(trait_long, aes(x = species, y = value)) +
-  geom_boxplot() +
-  facet_grid(trait ~ site, scales = "free_y") +
-  theme_classic()
 
 ##Step: Primary repeated measures models-----
 aov_N <- aov(
   nitro_perc ~ site * species * week_f + Error(tree_id/week_f),
   data = isotope_data
 )
-
 
 aov_c13 <- aov(
   c13 ~ site * species * week_f + Error(tree_id/week_f),
@@ -246,12 +240,7 @@ complete_tree_ids <- isotope_data %>%
 isotope_complete <- isotope_data %>%
   filter(tree_id %in% complete_tree_ids)
 
-n_distinct(isotope_data$tree_id)
-n_distinct(isotope_complete$tree_id)
-
-nrow(isotope_data)
-nrow(isotope_complete)
-
+# model with only trees that have complete datasets (all weeks)
 aov_log_N_complete <- aov(
   log_nitro_perc ~ site * species * week_f + Error(tree_id/week_f),
   data = isotope_complete
