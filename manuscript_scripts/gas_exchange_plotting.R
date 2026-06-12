@@ -51,14 +51,8 @@ gx <- gx_raw %>%
     iWUE = A / gsw
   )
 
-glimpse(gx)
 
-gx %>%
-  count(site, species, week) %>%
-  count(n)
-
-
-##Step: Summary figure to examine data quality-----
+##Step: Summary figures to examine data quality-----
 
 gx_long <- gx %>%
   pivot_longer(
@@ -378,7 +372,7 @@ ggplot(
 #     strip.background = element_blank(),
 #     strip.text = element_text(face = "plain")
 #   )
-##Step: 
+
 ##Step: Plotting and Repeated Measures for gsw-----
 
 #raw data
