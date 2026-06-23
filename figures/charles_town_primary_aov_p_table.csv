@@ -1,0 +1,13 @@
+trait_group,trait,scale,Site,Species,Site × species,site        ,species     ,Residuals   ,week_f             ,site:week_f        ,species:week_f     ,Site × species × week,Residuals          
+Growth,DBH growth,rank-transformed slope,0.215,0.004,0.289,NA,NA,NA,NA,NA,NA,NA,NA
+Gas exchange,Photosynthesis,raw,NA,NA,0.331,0.658,<0.001,NA,<0.001,0.001,0.053,0.036,NA
+Gas exchange,Stomatal conductance,square-root transformed,NA,NA,0.045,0.275,<0.001,NA,<0.001,<0.001,0.016,0.010,NA
+Gas exchange,Transpiration,square-root transformed,NA,NA,0.044,0.335,<0.001,NA,<0.001,<0.001,0.011,0.008,NA
+Gas exchange,Intrinsic water-use efficiency,raw,NA,NA,0.003,0.312,0.024,NA,<0.001,<0.001,0.012,0.036,NA
+Structural,Leaf mass per area,natural log,NA,NA,0.804,0.422,<0.001,NA,<0.001,<0.001,<0.001,0.786,NA
+Structural,Stomatal density,raw,NA,NA,0.391,0.341,<0.001,NA,<0.001,0.948,<0.001,0.108,NA
+Pigments,Total chlorophyll,raw,NA,NA,0.147,0.771,<0.001,NA,<0.001,0.840,<0.001,0.644,NA
+Water status,Midday leaf water potential,raw,NA,NA,0.739,0.491,<0.001,NA,<0.001,0.010,<0.001,0.134,NA
+Leaf chemistry,Foliar N,natural log,NA,NA,0.437,0.003,<0.001,NA,<0.001,0.007,0.048,0.471,NA
+Leaf chemistry,C:N,natural log,NA,NA,0.365,0.002,<0.001,NA,<0.001,0.024,<0.001,0.320,NA
+Leaf isotope,δ13C,raw,NA,NA,0.158,0.345,<0.001,NA,<0.001,0.044,0.097,0.647,NA
