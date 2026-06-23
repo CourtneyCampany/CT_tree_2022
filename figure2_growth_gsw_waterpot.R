@@ -73,9 +73,9 @@ wp_dat <- wp_raw %>%
   
 ##Step: Create plotting summaries-----
 
-  #Helper function for means and SE
+#Helper function for means and SE
   
-  mean_se <- function(x) {
+mean_se <- function(x) {
     tibble(
       n = sum(!is.na(x)),
       mean = mean(x, na.rm = TRUE),
@@ -179,6 +179,32 @@ mean_se_gg <- function(x) {
   data.frame(y = m, ymin = m - se, ymax = m + se)
 }
 
+#Dynamic y-axis range for Panel A
+#Includes both raw tree slopes and mean ± SE values
+
+growth_y_min <- min(
+  c(
+    dbh_slopes_tree$dbh_slope_mm_week,
+    dbh_slope_summary$mean - dbh_slope_summary$se
+  ),
+  na.rm = TRUE
+)
+
+growth_y_max <- max(
+  c(
+    dbh_slopes_tree$dbh_slope_mm_week,
+    dbh_slope_summary$mean + dbh_slope_summary$se
+  ),
+  na.rm = TRUE
+)
+
+growth_y_range <- growth_y_max - growth_y_min
+
+growth_ylim <- c(
+  growth_y_min - growth_y_range * 0.05,
+  growth_y_max + growth_y_range * 0.15
+)
+
 # ---- Shared theme
 
 fig_theme2 <- theme_classic(base_size = 12) +
@@ -192,7 +218,7 @@ fig_theme2 <- theme_classic(base_size = 12) +
 
 #Panel A: DBH growth slope, species emphasized
 
-p_growth2 <- ggplot(
+p_growth2_hleg <- ggplot(
   dbh_slopes_tree,
   aes(x = species, y = dbh_slope_mm_week, color = species)
 ) +
@@ -216,30 +242,36 @@ p_growth2 <- ggplot(
     size = 4
   ) +
   scale_color_manual(values = species_cols) +
+  coord_cartesian(ylim = growth_ylim) +
   labs(
     x = NULL,
-    y = expression("DBH growth slope (mm week"^-1*")"),
+    y = expression("Stem diameter growth slope (mm week"^-1*")"),
     shape = NULL
   ) +
   guides(
     color = "none",
     shape = guide_legend(
-      direction = "vertical",
+      direction = "horizontal",
+      nrow = 1,
       override.aes = list(color = "black", size = 2.8, alpha = 1)
     )
   ) +
   fig_theme2 +
   theme(
-    axis.text.x = element_text(angle = 35, hjust = 1),
-    legend.position = c(0.06, 0.20),
-    legend.justification = c(0, 0),
+    axis.text.x = element_text(angle = 35, hjust = 1, size=12),
+    legend.position = c(0.04, 0.98),
+    legend.justification = c(0, 1),
     legend.background = element_rect(fill = "white", color = NA),
-    legend.key = element_blank()
+    legend.key = element_blank(),
+    legend.margin = margin(0, 1, 0, 1),
+    legend.box.margin = margin(0, 0, 0, 0),
+    legend.spacing.x = unit(0.12, "cm"),
+    plot.margin = margin(t = 2, r = 4, b = 0, l = 4)
   )
 
 #Panel B: gsw, species-pooled time series
 
-p_gsw2 <- ggplot(
+p_gsw2_hleg <- ggplot(
   gsw_species_summary,
   aes(x = week, y = mean, color = species, group = species)
 ) +
@@ -260,23 +292,27 @@ p_gsw2 <- ggplot(
   ) +
   guides(
     color = guide_legend(
-      direction = "vertical",
+      direction = "horizontal",
+      nrow = 1,
       override.aes = list(linewidth = 1, size = 2.8)
     )
   ) +
   fig_theme2 +
   theme(
     axis.text.x = element_blank(),
-    legend.position = c(0.03, 0.97),
+    legend.position = c(0.04, 0.98),
     legend.justification = c(0, 1),
     legend.background = element_rect(fill = "white", color = NA),
-    legend.key = element_blank()
+    legend.key = element_blank(),
+    legend.margin = margin(0, 1, 0, 1),
+    legend.box.margin = margin(0, 0, 0, 0),
+    legend.spacing.x = unit(0.12, "cm"),
+    plot.margin = margin(t = 2, r = 4, b = 0, l = 4)
   )
-
 
 #Panel C: Psi_md, species-pooled time series
 
-p_psi2 <- ggplot(
+p_psi2_tight <- ggplot(
   psi_species_summary,
   aes(x = week, y = mean, color = species, group = species)
 ) +
@@ -295,13 +331,42 @@ p_psi2 <- ggplot(
     y = expression(Psi[md]~"(MPa)")
   ) +
   guides(color = "none") +
-  fig_theme2
+  fig_theme2 +
+  theme(
+    legend.position = "none",
+    axis.title.x = element_text(margin = margin(t = -8)),
+    plot.margin = margin(t = 0, r = 4, b = 0, l = 4)
+  )
 
 # Combine: compact growth panel + wide stacked physiology panels
 
-fig2_draft3 <- p_growth2 + (p_gsw2 / p_psi2) +
+right_stack <- p_gsw2_hleg / p_psi2_tight +
+  plot_layout(heights = c(1, 1))
+
+fig2_legend_test3 <- p_growth2_hleg + right_stack +
   plot_layout(widths = c(0.8, 2.2)) +
   plot_annotation(tag_levels = "A")
 
-windows()
-fig2_draft3
+# windows()
+# fig2_legend_test3
+
+
+ggsave(
+  filename = "figures/figure2_growth_gsw_psi.png",
+  plot = fig2_legend_test3,
+  width = 9.5,
+  height = 5.2,
+  units = "in",
+  dpi = 600
+)
+
+# ---- Save PDF ----
+
+ggsave(
+  filename = "figures/figure2_growth_gsw_psi.pdf",
+  plot = fig2_legend_test3,
+  width = 9.5,
+  height = 5.2,
+  units = "in",
+  device = cairo_pdf
+)
