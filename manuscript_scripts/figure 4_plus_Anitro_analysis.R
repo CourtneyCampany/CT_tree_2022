@@ -122,20 +122,20 @@ gx_N %>%
 
 #diagnostic plot
 
-ggplot(gx_N, aes(x = leaf_N, y = A, color = species)) +
-  geom_point(alpha = 0.55, size = 2) +
-  geom_smooth(
-    method = "lm",
-    se = TRUE
-  ) +
-  facet_wrap(~ site) +
-  scale_color_manual(values = species_cols_okabe) +
-  labs(
-    x = "Leaf nitrogen (%)",
-    y = expression(A~"(µmol CO"[2]*" m"^-2*" s"^-1*")"),
-    color = "Species"
-  ) +
-  theme_classic()
+# ggplot(gx_N, aes(x = leaf_N, y = A, color = species)) +
+#   geom_point(alpha = 0.55, size = 2) +
+#   geom_smooth(
+#     method = "lm",
+#     se = TRUE
+#   ) +
+#   facet_wrap(~ site) +
+#   scale_color_manual(values = species_cols_okabe) +
+#   labs(
+#     x = "Leaf nitrogen (%)",
+#     y = expression(A~"(µmol CO"[2]*" m"^-2*" s"^-1*")"),
+#     color = "Species"
+#   ) +
+#   theme_classic()
 
 #does not show a lot of relationships
 
@@ -240,20 +240,20 @@ AIC(
 #moving forward with area based
 
 #model checks
-plot(m_A_Narea_linear)
-
-gx_N_area$resid_A_Narea <- residuals(m_A_Narea_linear)
-
-ggplot(gx_N_area, aes(x = Narea, y = resid_A_Narea, color = species)) +
-  geom_point(alpha = 0.6, size = 2) +
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  scale_color_manual(values = species_cols_okabe) +
-  labs(
-    x = expression(N[area]~"(g N m"^-2*")"),
-    y = "Model residuals",
-    color = "Species"
-  ) +
-  theme_classic()
+# plot(m_A_Narea_linear)
+# 
+# gx_N_area$resid_A_Narea <- residuals(m_A_Narea_linear)
+# 
+# ggplot(gx_N_area, aes(x = Narea, y = resid_A_Narea, color = species)) +
+#   geom_point(alpha = 0.6, size = 2) +
+#   geom_hline(yintercept = 0, linetype = "dashed") +
+#   scale_color_manual(values = species_cols_okabe) +
+#   labs(
+#     x = expression(N[area]~"(g N m"^-2*")"),
+#     y = "Model residuals",
+#     color = "Species"
+#   ) +
+#   theme_classic()
 
 ##Step: Manuscript figure for the A- N model-------
 
@@ -430,7 +430,6 @@ pred_A_gsw_species <- pred_A_gsw_species %>%
   )
 
 
-
 #y axis range set
 A_ylim <- c(
   0,
@@ -511,18 +510,20 @@ p_A_Narea_panel <- p_A_Narea +
     legend.position = "bottom"
   )
 
+#combine panels
 p_A_trait_combo <- p_A_gsw_panel / p_A_Narea_panel +
   plot_layout(guides = "collect") +
   plot_annotation(tag_levels = "A") &
   theme(
-    legend.position = "bottom"
+    legend.position = "bottom",
+    legend.title = element_blank()
   )
 
 windows()
 p_A_trait_combo
 
 ggsave(
-  filename = "figures/A_trait_relationships_combo.png",
+  filename = "figures/figure4.png",
   plot = p_A_trait_combo,
   width = 7.5,
   height = 8.5,
