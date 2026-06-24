@@ -73,161 +73,161 @@ trait_long <- isotope_data %>%
     values_to = "value"
   )
 
-# Histograms
-ggplot(trait_long, aes(x = value)) +
-  geom_histogram(bins = 25) +
-  facet_wrap(~ trait, scales = "free") +
-  theme_classic()
-
-# Q-Q plots
-ggplot(trait_long, aes(sample = value)) +
-  stat_qq() +
-  stat_qq_line() +
-  facet_wrap(~ trait, scales = "free") +
-  theme_classic()
+# # Histograms
+# ggplot(trait_long, aes(x = value)) +
+#   geom_histogram(bins = 25) +
+#   facet_wrap(~ trait, scales = "free") +
+#   theme_classic()
+# 
+# # Q-Q plots
+# ggplot(trait_long, aes(sample = value)) +
+#   stat_qq() +
+#   stat_qq_line() +
+#   facet_wrap(~ trait, scales = "free") +
+#   theme_classic()
 
 
 ##Step: Primary repeated measures models-----
-aov_N <- aov(
-  nitro_perc ~ site * species * week_f + Error(tree_id/week_f),
-  data = isotope_data
-)
+# aov_N <- aov(
+#   nitro_perc ~ site * species * week_f + Error(tree_id/week_f),
+#   data = isotope_data
+# )
+# 
+# aov_c13 <- aov(
+#   c13 ~ site * species * week_f + Error(tree_id/week_f),
+#   data = isotope_data
+# )
+# 
+# aov_log_CN <- aov(
+#   log_CN_ratio ~ site * species * week_f + Error(tree_id/week_f),
+#   data = isotope_data
+# )
+# 
+# summary(aov_N)
+# summary(aov_c13)
+# summary(aov_log_CN)
+# 
+# #model diagnostics
+# diag_N <- lm(
+#   nitro_perc ~ site * species * week_f + tree_id,
+#   data = isotope_data
+# )
+# 
+# diag_log_CN <- lm(
+#   log_CN_ratio ~ site * species * week_f + tree_id,
+#   data = isotope_data
+# )
+# 
+# diag_c13 <- lm(
+#   c13 ~ site * species * week_f + tree_id,
+#   data = isotope_data
+# )
+# 
+# #Extract residuals, fitted values, and influence measures
+# extract_diag <- function(model, trait_name, data) {
+#   row_ids <- as.integer(names(residuals(model)))
+#   
+#   data[row_ids, ] %>%
+#     mutate(
+#       trait = trait_name,
+#       fitted = fitted(model),
+#       residual = residuals(model),
+#       std_residual = rstandard(model),
+#       cooks_distance = cooks.distance(model)
+#     )
+# }
+# 
+# diag_all <- bind_rows(
+#   extract_diag(diag_N, "Foliar %N", isotope_data),
+#   extract_diag(diag_log_CN, "log(C/N)", isotope_data),
+#   extract_diag(diag_c13, "c13", isotope_data)
+# )
+# 
+# #residuals
+# ggplot(diag_all, aes(x = fitted, y = std_residual)) +
+#   geom_point() +
+#   geom_hline(yintercept = 0) +
+#   geom_hline(yintercept = c(-2, 2), linetype = "dashed") +
+#   geom_hline(yintercept = c(-3, 3), linetype = "dotted") +
+#   facet_wrap(~ trait, scales = "free") +
+#   theme_classic()
+# 
+# diag_top5_residuals %>%
+#   select(
+#     trait, site, species, replicate, week, tree_id,
+#     nitro_perc, carbon_perc, c13, CN_ratio,
+#     fitted, residual, std_residual, cooks_distance
+#   ) %>%
+#   print(n = Inf, width = Inf)
+# 
+# diag_extreme_residuals <- diag_all %>%
+#   filter(abs(std_residual) > 3) %>%
+#   select(
+#     trait, site, species, replicate, week, tree_id,
+#     nitro_perc, carbon_perc, c13, CN_ratio,
+#     fitted, residual, std_residual, cooks_distance
+#   ) %>%
+#   arrange(trait, desc(abs(std_residual)))
+# 
+# diag_extreme_residuals %>%
+#   print(n = Inf, width = Inf)
 
-aov_c13 <- aov(
-  c13 ~ site * species * week_f + Error(tree_id/week_f),
-  data = isotope_data
-)
-
-aov_log_CN <- aov(
-  log_CN_ratio ~ site * species * week_f + Error(tree_id/week_f),
-  data = isotope_data
-)
-
-summary(aov_N)
-summary(aov_c13)
-summary(aov_log_CN)
-
-#model diagnostics
-diag_N <- lm(
-  nitro_perc ~ site * species * week_f + tree_id,
-  data = isotope_data
-)
-
-diag_log_CN <- lm(
-  log_CN_ratio ~ site * species * week_f + tree_id,
-  data = isotope_data
-)
-
-diag_c13 <- lm(
-  c13 ~ site * species * week_f + tree_id,
-  data = isotope_data
-)
-
-#Extract residuals, fitted values, and influence measures
-extract_diag <- function(model, trait_name, data) {
-  row_ids <- as.integer(names(residuals(model)))
-  
-  data[row_ids, ] %>%
-    mutate(
-      trait = trait_name,
-      fitted = fitted(model),
-      residual = residuals(model),
-      std_residual = rstandard(model),
-      cooks_distance = cooks.distance(model)
-    )
-}
-
-diag_all <- bind_rows(
-  extract_diag(diag_N, "Foliar %N", isotope_data),
-  extract_diag(diag_log_CN, "log(C/N)", isotope_data),
-  extract_diag(diag_c13, "c13", isotope_data)
-)
-
-#residuals
-ggplot(diag_all, aes(x = fitted, y = std_residual)) +
-  geom_point() +
-  geom_hline(yintercept = 0) +
-  geom_hline(yintercept = c(-2, 2), linetype = "dashed") +
-  geom_hline(yintercept = c(-3, 3), linetype = "dotted") +
-  facet_wrap(~ trait, scales = "free") +
-  theme_classic()
-
-diag_top5_residuals %>%
-  select(
-    trait, site, species, replicate, week, tree_id,
-    nitro_perc, carbon_perc, c13, CN_ratio,
-    fitted, residual, std_residual, cooks_distance
-  ) %>%
-  print(n = Inf, width = Inf)
-
-diag_extreme_residuals <- diag_all %>%
-  filter(abs(std_residual) > 3) %>%
-  select(
-    trait, site, species, replicate, week, tree_id,
-    nitro_perc, carbon_perc, c13, CN_ratio,
-    fitted, residual, std_residual, cooks_distance
-  ) %>%
-  arrange(trait, desc(abs(std_residual)))
-
-diag_extreme_residuals %>%
-  print(n = Inf, width = Inf)
-
-#q-q plots
-ggplot(diag_all, aes(sample = std_residual)) +
-  stat_qq() +
-  stat_qq_line() +
-  facet_wrap(~ trait, scales = "free") +
-  theme_classic()
-#shapiro
-diag_all %>%
-  group_by(trait) %>%
-  summarize(
-    n = n(),
-    shapiro_p = shapiro.test(std_residual)$p.value,
-    min_std_resid = min(std_residual),
-    max_std_resid = max(std_residual),
-    .groups = "drop"
-  )
+# #q-q plots
+# ggplot(diag_all, aes(sample = std_residual)) +
+#   stat_qq() +
+#   stat_qq_line() +
+#   facet_wrap(~ trait, scales = "free") +
+#   theme_classic()
+# #shapiro
+# diag_all %>%
+#   group_by(trait) %>%
+#   summarize(
+#     n = n(),
+#     shapiro_p = shapiro.test(std_residual)$p.value,
+#     min_std_resid = min(std_residual),
+#     max_std_resid = max(std_residual),
+#     .groups = "drop"
+#   )
 #some non-normaility but for N based on a singular point and with
 #13C the transformation is not easy
 
 
-#should we also log transform N%?
+#should we log transform N%?
 isotope_data <- isotope_data %>%
   mutate(
     log_nitro_perc = log(nitro_perc)
   )
 
-aov_log_N <- aov(
-  log_nitro_perc ~ site * species * week_f + Error(tree_id/week_f),
-  data = isotope_data
-)
-
-summary(aov_log_N)
-
-diag_log_N <- lm(
-  log_nitro_perc ~ site * species * week_f + tree_id,
-  data = isotope_data
-)
-
-diag_log_N_table <- extract_diag(
-  diag_log_N,
-  "log(Foliar %N)",
-  isotope_data
-)
-
-diag_log_N_table %>%
-  summarize(
-    n = n(),
-    shapiro_p = shapiro.test(std_residual)$p.value,
-    min_std_resid = min(std_residual),
-    max_std_resid = max(std_residual),
-    max_abs_std_resid = max(abs(std_residual)),
-    max_cooks_distance = max(cooks_distance)
-  )
-
-fligner.test(log_nitro_perc ~ interaction(site, species), data = isotope_data)
-fligner.test(log_nitro_perc ~ week_f, data = isotope_data)
+# aov_log_N <- aov(
+#   log_nitro_perc ~ site * species * week_f + Error(tree_id/week_f),
+#   data = isotope_data
+# )
+# 
+# summary(aov_log_N)
+# 
+# diag_log_N <- lm(
+#   log_nitro_perc ~ site * species * week_f + tree_id,
+#   data = isotope_data
+# )
+# 
+# diag_log_N_table <- extract_diag(
+#   diag_log_N,
+#   "log(Foliar %N)",
+#   isotope_data
+# )
+# 
+# diag_log_N_table %>%
+#   summarize(
+#     n = n(),
+#     shapiro_p = shapiro.test(std_residual)$p.value,
+#     min_std_resid = min(std_residual),
+#     max_std_resid = max(std_residual),
+#     max_abs_std_resid = max(abs(std_residual)),
+#     max_cooks_distance = max(cooks_distance)
+#   )
+# 
+# fligner.test(log_nitro_perc ~ interaction(site, species), data = isotope_data)
+# fligner.test(log_nitro_perc ~ week_f, data = isotope_data)
 
 ## aov struggled with the missing trees that did not have complete repeated measures
 ## remove those trees (n=4) and only run models on trees that are complete'
@@ -245,11 +245,6 @@ aov_log_N_complete <- aov(
   log_nitro_perc ~ site * species * week_f + Error(tree_id/week_f),
   data = isotope_complete
 )
-
-# aov_N_complete <- aov(
-#   nitro_perc ~ site * species * week_f + Error(tree_id/week_f),
-#   data = isotope_complete
-# )
 
 aov_log_CN_complete <- aov(
   log_CN_ratio ~ site * species * week_f + Error(tree_id/week_f),
@@ -523,193 +518,193 @@ species_week_ranks
 ##Step: Make figures ------
 
 #site × week pattern for foliar N and C/N across species
-site_week_plot_data <- site_week_plot_data %>%
-  mutate(
-    trait_label = case_when(
-      trait == "mean_N" ~ "Foliar N (%)",
-      trait == "mean_CN" ~ "Foliar C/N",
-      trait == "mean_c13" ~ "c13"
-    )
-  )
-
-ggplot(site_week_plot_data, aes(x = week, y = mean, group = site, shape = site)) +
-  geom_line() +
-  geom_point(size = 2) +
-  geom_errorbar(
-    aes(ymin = mean - se, ymax = mean + se),
-    width = 0.15
-  ) +
-  facet_wrap(~ trait_label, scales = "free_y") +
-  theme_classic() +
-  labs(
-    x = "Week",
-    y = "Mean ± SE",
-    shape = "Site"
-  )
-
-#species x week
-species_week_plot_data <- species_week_means %>%
-  pivot_longer(
-    cols = c(mean_N, mean_CN, mean_c13),
-    names_to = "trait",
-    values_to = "mean"
-  ) %>%
-  mutate(
-    se = case_when(
-      trait == "mean_N" ~ se_N,
-      trait == "mean_CN" ~ se_CN,
-      trait == "mean_c13" ~ se_c13
-    ),
-    trait_label = case_when(
-      trait == "mean_N" ~ "Foliar N (%)",
-      trait == "mean_CN" ~ "Foliar C/N",
-      trait == "mean_c13" ~ "c13"
-    )
-  )
-
-ggplot(species_week_plot_data, aes(x = week, y = mean, group = species, shape = species)) +
-  geom_line() +
-  geom_point(size = 2) +
-  geom_errorbar(
-    aes(ymin = mean - se, ymax = mean + se),
-    width = 0.15
-  ) +
-  facet_wrap(~ trait_label, scales = "free_y") +
-  theme_classic() +
-  labs(
-    x = "Week",
-    y = "Mean ± SE",
-    shape = "Species"
-  )
-
-ggsave(
-  "figures/elemental_isotope_site_week_figure.png",
-  width = 8,
-  height = 5,
-  dpi = 300
-)
-
-ggsave(
-  "figures/elemental_isotope_species_week_figure.png",
-  width = 8,
-  height = 5,
-  dpi = 300
-)
-
-#single panel figure
-# Combine site and species summaries into one long plotting table
-# Make site-level summary
-site_week_means <- isotope_complete %>%
-  group_by(site, week) %>%
-  summarize(
-    n = n(),
-    
-    mean_N = mean(nitro_perc, na.rm = TRUE),
-    se_N = sd(nitro_perc, na.rm = TRUE) / sqrt(n),
-    
-    mean_CN = mean(CN_ratio, na.rm = TRUE),
-    se_CN = sd(CN_ratio, na.rm = TRUE) / sqrt(n),
-    
-    mean_c13 = mean(c13, na.rm = TRUE),
-    se_c13 = sd(c13, na.rm = TRUE) / sqrt(n),
-    
-    .groups = "drop"
-  ) %>%
-  mutate(
-    panel = "Site",
-    group = as.character(site)
-  )
-
-# Make species-level summary
-species_week_means <- isotope_complete %>%
-  group_by(species, week) %>%
-  summarize(
-    n = n(),
-    
-    mean_N = mean(nitro_perc, na.rm = TRUE),
-    se_N = sd(nitro_perc, na.rm = TRUE) / sqrt(n),
-    
-    mean_CN = mean(CN_ratio, na.rm = TRUE),
-    se_CN = sd(CN_ratio, na.rm = TRUE) / sqrt(n),
-    
-    mean_c13 = mean(c13, na.rm = TRUE),
-    se_c13 = sd(c13, na.rm = TRUE) / sqrt(n),
-    
-    .groups = "drop"
-  ) %>%
-  mutate(
-    panel = "Species",
-    group = as.character(species)
-  )
-
-elemental_combined_plot_data <- bind_rows(
-  site_week_means,
-  species_week_means
-) %>%
-  pivot_longer(
-    cols = c(mean_N, mean_CN, mean_c13),
-    names_to = "trait",
-    values_to = "mean"
-  ) %>%
-  mutate(
-    se = case_when(
-      trait == "mean_N" ~ se_N,
-      trait == "mean_CN" ~ se_CN,
-      trait == "mean_c13" ~ se_c13
-    ),
-    trait_label = case_when(
-      trait == "mean_N" ~ "Foliar N (%)",
-      trait == "mean_CN" ~ "Foliar C/N",
-      trait == "mean_c13" ~ "c13"
-    ),
-    panel = factor(panel, levels = c("Site", "Species")),
-    trait_label = factor(
-      trait_label,
-      levels = c("Foliar N (%)", "Foliar C/N", "c13")
-    )
-  )
-
-elemental_combined_plot_data <- elemental_combined_plot_data %>%
-  mutate(
-    group = case_when(
-      panel == "Site" & group == "c" ~ "Downtown",
-      panel == "Site" & group == "p" ~ "Park",
-      TRUE ~ group
-    )
-  )
-
-# Combined panel figure
-elemental_combined_panel <- ggplot(
-  elemental_combined_plot_data,
-  aes(x = week, y = mean, group = group, shape = group, linetype = group)
-) +
-  geom_line() +
-  geom_point(size = 2) +
-  geom_errorbar(
-    aes(ymin = mean - se, ymax = mean + se),
-    width = 0.15
-  ) +
-  facet_grid(
-    trait_label ~ panel,
-    scales = "free_y"
-  ) +
-  theme_classic() +
-  labs(
-    x = "Week",
-    y = "Mean ± SE",
-    shape = "Group",
-    linetype = "Group"
-  )
-
-elemental_combined_panel
-
-ggsave(
-  "figures/elemental_isotope_combined_panel.png",
-  elemental_combined_panel,
-  width = 9,
-  height = 8,
-  dpi = 300
-)
+# site_week_plot_data <- site_week_plot_data %>%
+#   mutate(
+#     trait_label = case_when(
+#       trait == "mean_N" ~ "Foliar N (%)",
+#       trait == "mean_CN" ~ "Foliar C/N",
+#       trait == "mean_c13" ~ "c13"
+#     )
+#   )
+# 
+# ggplot(site_week_plot_data, aes(x = week, y = mean, group = site, shape = site)) +
+#   geom_line() +
+#   geom_point(size = 2) +
+#   geom_errorbar(
+#     aes(ymin = mean - se, ymax = mean + se),
+#     width = 0.15
+#   ) +
+#   facet_wrap(~ trait_label, scales = "free_y") +
+#   theme_classic() +
+#   labs(
+#     x = "Week",
+#     y = "Mean ± SE",
+#     shape = "Site"
+#   )
+# 
+# #species x week
+# species_week_plot_data <- species_week_means %>%
+#   pivot_longer(
+#     cols = c(mean_N, mean_CN, mean_c13),
+#     names_to = "trait",
+#     values_to = "mean"
+#   ) %>%
+#   mutate(
+#     se = case_when(
+#       trait == "mean_N" ~ se_N,
+#       trait == "mean_CN" ~ se_CN,
+#       trait == "mean_c13" ~ se_c13
+#     ),
+#     trait_label = case_when(
+#       trait == "mean_N" ~ "Foliar N (%)",
+#       trait == "mean_CN" ~ "Foliar C/N",
+#       trait == "mean_c13" ~ "c13"
+#     )
+#   )
+# 
+# ggplot(species_week_plot_data, aes(x = week, y = mean, group = species, shape = species)) +
+#   geom_line() +
+#   geom_point(size = 2) +
+#   geom_errorbar(
+#     aes(ymin = mean - se, ymax = mean + se),
+#     width = 0.15
+#   ) +
+#   facet_wrap(~ trait_label, scales = "free_y") +
+#   theme_classic() +
+#   labs(
+#     x = "Week",
+#     y = "Mean ± SE",
+#     shape = "Species"
+#   )
+# 
+# ggsave(
+#   "figures/elemental_isotope_site_week_figure.png",
+#   width = 8,
+#   height = 5,
+#   dpi = 300
+# )
+# 
+# ggsave(
+#   "figures/elemental_isotope_species_week_figure.png",
+#   width = 8,
+#   height = 5,
+#   dpi = 300
+# )
+# 
+# #single panel figure
+# # Combine site and species summaries into one long plotting table
+# # Make site-level summary
+# site_week_means <- isotope_complete %>%
+#   group_by(site, week) %>%
+#   summarize(
+#     n = n(),
+#     
+#     mean_N = mean(nitro_perc, na.rm = TRUE),
+#     se_N = sd(nitro_perc, na.rm = TRUE) / sqrt(n),
+#     
+#     mean_CN = mean(CN_ratio, na.rm = TRUE),
+#     se_CN = sd(CN_ratio, na.rm = TRUE) / sqrt(n),
+#     
+#     mean_c13 = mean(c13, na.rm = TRUE),
+#     se_c13 = sd(c13, na.rm = TRUE) / sqrt(n),
+#     
+#     .groups = "drop"
+#   ) %>%
+#   mutate(
+#     panel = "Site",
+#     group = as.character(site)
+#   )
+# 
+# # Make species-level summary
+# species_week_means <- isotope_complete %>%
+#   group_by(species, week) %>%
+#   summarize(
+#     n = n(),
+#     
+#     mean_N = mean(nitro_perc, na.rm = TRUE),
+#     se_N = sd(nitro_perc, na.rm = TRUE) / sqrt(n),
+#     
+#     mean_CN = mean(CN_ratio, na.rm = TRUE),
+#     se_CN = sd(CN_ratio, na.rm = TRUE) / sqrt(n),
+#     
+#     mean_c13 = mean(c13, na.rm = TRUE),
+#     se_c13 = sd(c13, na.rm = TRUE) / sqrt(n),
+#     
+#     .groups = "drop"
+#   ) %>%
+#   mutate(
+#     panel = "Species",
+#     group = as.character(species)
+#   )
+# 
+# elemental_combined_plot_data <- bind_rows(
+#   site_week_means,
+#   species_week_means
+# ) %>%
+#   pivot_longer(
+#     cols = c(mean_N, mean_CN, mean_c13),
+#     names_to = "trait",
+#     values_to = "mean"
+#   ) %>%
+#   mutate(
+#     se = case_when(
+#       trait == "mean_N" ~ se_N,
+#       trait == "mean_CN" ~ se_CN,
+#       trait == "mean_c13" ~ se_c13
+#     ),
+#     trait_label = case_when(
+#       trait == "mean_N" ~ "Foliar N (%)",
+#       trait == "mean_CN" ~ "Foliar C/N",
+#       trait == "mean_c13" ~ "c13"
+#     ),
+#     panel = factor(panel, levels = c("Site", "Species")),
+#     trait_label = factor(
+#       trait_label,
+#       levels = c("Foliar N (%)", "Foliar C/N", "c13")
+#     )
+#   )
+# 
+# elemental_combined_plot_data <- elemental_combined_plot_data %>%
+#   mutate(
+#     group = case_when(
+#       panel == "Site" & group == "c" ~ "Downtown",
+#       panel == "Site" & group == "p" ~ "Park",
+#       TRUE ~ group
+#     )
+#   )
+# 
+# # Combined panel figure
+# elemental_combined_panel <- ggplot(
+#   elemental_combined_plot_data,
+#   aes(x = week, y = mean, group = group, shape = group, linetype = group)
+# ) +
+#   geom_line() +
+#   geom_point(size = 2) +
+#   geom_errorbar(
+#     aes(ymin = mean - se, ymax = mean + se),
+#     width = 0.15
+#   ) +
+#   facet_grid(
+#     trait_label ~ panel,
+#     scales = "free_y"
+#   ) +
+#   theme_classic() +
+#   labs(
+#     x = "Week",
+#     y = "Mean ± SE",
+#     shape = "Group",
+#     linetype = "Group"
+#   )
+# 
+# elemental_combined_panel
+# 
+# ggsave(
+#   "figures/elemental_isotope_combined_panel.png",
+#   elemental_combined_panel,
+#   width = 9,
+#   height = 8,
+#   dpi = 300
+# )
 
 ##SteP: Extract model results for a manuscript table-----
 

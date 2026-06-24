@@ -62,83 +62,83 @@ stomata_density_primary <- stomata_density_leaf %>%
   )
 
 #check data distribution
-density_scale_summary <- stomata_density_primary %>%
-  summarise(
-    n = n(),
-    min_density = min(mean_stomatal_density_mm2),
-    mean_density = mean(mean_stomatal_density_mm2),
-    median_density = median(mean_stomatal_density_mm2),
-    max_density = max(mean_stomatal_density_mm2),
-    sd_density = sd(mean_stomatal_density_mm2),
-    cv_density = sd_density / mean_density,
-    skew_raw = mean(
-      ((mean_stomatal_density_mm2 - mean_density) / sd_density)^3
-    ),
-    min_log_density = min(log_stomatal_density_mm2),
-    mean_log_density = mean(log_stomatal_density_mm2),
-    median_log_density = median(log_stomatal_density_mm2),
-    max_log_density = max(log_stomatal_density_mm2),
-    sd_log_density = sd(log_stomatal_density_mm2),
-    skew_log = mean(
-      ((log_stomatal_density_mm2 - mean_log_density) / sd_log_density)^3
-    )
-  )
-
-density_scale_summary
-
-density_by_group <- stomata_density_primary %>%
-  group_by(site, species) %>%
-  summarise(
-    n = n(),
-    mean_density = mean(mean_stomatal_density_mm2),
-    sd_density = sd(mean_stomatal_density_mm2),
-    cv_density = sd_density / mean_density,
-    min_density = min(mean_stomatal_density_mm2),
-    median_density = median(mean_stomatal_density_mm2),
-    max_density = max(mean_stomatal_density_mm2),
-    .groups = "drop"
-  )
-
-density_by_group
-
-ggplot(stomata_density_primary,
-       aes(x = mean_stomatal_density_mm2)) +
-  geom_histogram(bins = 20) +
-  labs(
-    x = expression("Stomatal density (stomata " * mm^{-2} * ")"),
-    y = "Frequency"
-  ) +
-  theme_classic()
-
-ggplot(stomata_density_primary,
-       aes(x = log_stomatal_density_mm2)) +
-  geom_histogram(bins = 20) +
-  labs(
-    x = "log stomatal density",
-    y = "Frequency"
-  ) +
-  theme_classic()
-#log not better
-
-ggplot(stomata_density_primary,
-       aes(sample = mean_stomatal_density_mm2)) +
-  stat_qq() +
-  stat_qq_line() +
-  labs(
-    x = "Theoretical quantiles",
-    y = expression("Stomatal density (stomata " * mm^{-2} * ")")
-  ) +
-  theme_classic()
-
-ggplot(stomata_density_primary,
-       aes(sample = log_stomatal_density_mm2)) +
-  stat_qq() +
-  stat_qq_line() +
-  labs(
-    x = "Theoretical quantiles",
-    y = "log stomatal density"
-  ) +
-  theme_classic()
+# density_scale_summary <- stomata_density_primary %>%
+#   summarise(
+#     n = n(),
+#     min_density = min(mean_stomatal_density_mm2),
+#     mean_density = mean(mean_stomatal_density_mm2),
+#     median_density = median(mean_stomatal_density_mm2),
+#     max_density = max(mean_stomatal_density_mm2),
+#     sd_density = sd(mean_stomatal_density_mm2),
+#     cv_density = sd_density / mean_density,
+#     skew_raw = mean(
+#       ((mean_stomatal_density_mm2 - mean_density) / sd_density)^3
+#     ),
+#     min_log_density = min(log_stomatal_density_mm2),
+#     mean_log_density = mean(log_stomatal_density_mm2),
+#     median_log_density = median(log_stomatal_density_mm2),
+#     max_log_density = max(log_stomatal_density_mm2),
+#     sd_log_density = sd(log_stomatal_density_mm2),
+#     skew_log = mean(
+#       ((log_stomatal_density_mm2 - mean_log_density) / sd_log_density)^3
+#     )
+#   )
+# 
+# density_scale_summary
+# 
+# density_by_group <- stomata_density_primary %>%
+#   group_by(site, species) %>%
+#   summarise(
+#     n = n(),
+#     mean_density = mean(mean_stomatal_density_mm2),
+#     sd_density = sd(mean_stomatal_density_mm2),
+#     cv_density = sd_density / mean_density,
+#     min_density = min(mean_stomatal_density_mm2),
+#     median_density = median(mean_stomatal_density_mm2),
+#     max_density = max(mean_stomatal_density_mm2),
+#     .groups = "drop"
+#   )
+# 
+# density_by_group
+# 
+# ggplot(stomata_density_primary,
+#        aes(x = mean_stomatal_density_mm2)) +
+#   geom_histogram(bins = 20) +
+#   labs(
+#     x = expression("Stomatal density (stomata " * mm^{-2} * ")"),
+#     y = "Frequency"
+#   ) +
+#   theme_classic()
+# 
+# ggplot(stomata_density_primary,
+#        aes(x = log_stomatal_density_mm2)) +
+#   geom_histogram(bins = 20) +
+#   labs(
+#     x = "log stomatal density",
+#     y = "Frequency"
+#   ) +
+#   theme_classic()
+# #log not better
+# 
+# ggplot(stomata_density_primary,
+#        aes(sample = mean_stomatal_density_mm2)) +
+#   stat_qq() +
+#   stat_qq_line() +
+#   labs(
+#     x = "Theoretical quantiles",
+#     y = expression("Stomatal density (stomata " * mm^{-2} * ")")
+#   ) +
+#   theme_classic()
+# 
+# ggplot(stomata_density_primary,
+#        aes(sample = log_stomatal_density_mm2)) +
+#   stat_qq() +
+#   stat_qq_line() +
+#   labs(
+#     x = "Theoretical quantiles",
+#     y = "log stomatal density"
+#   ) +
+#   theme_classic()
 #log not better
 
 ##Step: run the repeated measures model-----
@@ -380,75 +380,75 @@ summary(rm_density_pit)
 
 ##Step: Plot stomatal density -------
 
-species_labels <- c(
-  d = "Dogwood",
-  h = "Hawthorn",
-  m = "Maple"
-)
-
-
-density_species_week_plot_data <- stomata_density_primary %>%
-  mutate(
-    species_label = factor(
-      species_labels[as.character(species)],
-      levels = species_labels
-    )
-  ) %>%
-  group_by(species, species_label, week) %>%
-  summarise(
-    n = n(),
-    mean_density = mean(mean_stomatal_density_mm2),
-    sd_density = sd(mean_stomatal_density_mm2),
-    se_density = sd_density / sqrt(n),
-    .groups = "drop"
-  )
-
-fig_stomatal_density <- ggplot(
-  density_species_week_plot_data,
-  aes(
-    x = week,
-    y = mean_density,
-    group = species_label,
-    shape = species_label,
-    linetype = species_label
-  )
-) +
-  geom_line(linewidth = 0.7) +
-  geom_point(size = 2.4) +
-  geom_errorbar(
-    aes(
-      ymin = mean_density - se_density,
-      ymax = mean_density + se_density
-    ),
-    width = 0.15,
-    linewidth = 0.5
-  ) +
-  scale_x_continuous(
-    breaks = 2:10,
-    limits = c(2, 10)
-  ) +
-  labs(
-    x = "Manuscript week",
-    y = expression("Stomatal density (stomata " * mm^{-2} * ")"),
-    shape = NULL,
-    linetype = NULL
-  ) +
-  theme_classic(base_size = 12) +
-  theme(
-    legend.position = "top",
-    legend.justification = "center",
-    axis.title = element_text(size = 12),
-    axis.text = element_text(size = 11),
-    legend.text = element_text(size = 11)
-  )
-
-fig_stomatal_density
-
-
-ggsave(
-  filename = "figures/fig_stomatal_density_species_week.pdf",
-  plot = fig_stomatal_density,
-  width = 5.5,
-  height = 4.0,
-  units = "in"
-)
+# species_labels <- c(
+#   d = "Dogwood",
+#   h = "Hawthorn",
+#   m = "Maple"
+# )
+# 
+# 
+# density_species_week_plot_data <- stomata_density_primary %>%
+#   mutate(
+#     species_label = factor(
+#       species_labels[as.character(species)],
+#       levels = species_labels
+#     )
+#   ) %>%
+#   group_by(species, species_label, week) %>%
+#   summarise(
+#     n = n(),
+#     mean_density = mean(mean_stomatal_density_mm2),
+#     sd_density = sd(mean_stomatal_density_mm2),
+#     se_density = sd_density / sqrt(n),
+#     .groups = "drop"
+#   )
+# 
+# fig_stomatal_density <- ggplot(
+#   density_species_week_plot_data,
+#   aes(
+#     x = week,
+#     y = mean_density,
+#     group = species_label,
+#     shape = species_label,
+#     linetype = species_label
+#   )
+# ) +
+#   geom_line(linewidth = 0.7) +
+#   geom_point(size = 2.4) +
+#   geom_errorbar(
+#     aes(
+#       ymin = mean_density - se_density,
+#       ymax = mean_density + se_density
+#     ),
+#     width = 0.15,
+#     linewidth = 0.5
+#   ) +
+#   scale_x_continuous(
+#     breaks = 2:10,
+#     limits = c(2, 10)
+#   ) +
+#   labs(
+#     x = "Manuscript week",
+#     y = expression("Stomatal density (stomata " * mm^{-2} * ")"),
+#     shape = NULL,
+#     linetype = NULL
+#   ) +
+#   theme_classic(base_size = 12) +
+#   theme(
+#     legend.position = "top",
+#     legend.justification = "center",
+#     axis.title = element_text(size = 12),
+#     axis.text = element_text(size = 11),
+#     legend.text = element_text(size = 11)
+#   )
+# 
+# fig_stomatal_density
+# 
+# 
+# ggsave(
+#   filename = "figures/fig_stomatal_density_species_week.pdf",
+#   plot = fig_stomatal_density,
+#   width = 5.5,
+#   height = 4.0,
+#   units = "in"
+# )

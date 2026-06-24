@@ -56,14 +56,14 @@ Structural,Stomatal density,mean_stomatal_density_mm2,stomata mm^-2,raw,NA,site:
 Structural,Stomatal density,mean_stomatal_density_mm2,stomata mm^-2,raw,NA,species:week_f     ,species:week_f     ,16,NA,7.71668637348844,1.769987023818572e-13,<0.001,Complete-tree repeated-measures analysis; weeks 2–10 only
 Structural,Stomatal density,mean_stomatal_density_mm2,stomata mm^-2,raw,NA,site:species:week_f,Site × species × week,16,NA,1.491152036408499,0.1079619262757982,0.108,Complete-tree repeated-measures analysis; weeks 2–10 only
 Structural,Stomatal density,mean_stomatal_density_mm2,stomata mm^-2,raw,NA,Residuals          ,Residuals          ,168,NA,NA,NA,NA,Complete-tree repeated-measures analysis; weeks 2–10 only
-Pigments,Total chlorophyll,total_chl_ug_cm2,µg cm^-2,raw,NA,site        ,site        ,1,NA,0.08711390169167381,0.7712561887235119,0.771,Complete-tree repeated-measures analysis; DMF extraction
-Pigments,Total chlorophyll,total_chl_ug_cm2,µg cm^-2,raw,NA,species     ,species     ,2,NA,162.2746714304832,3.0545293148774353e-12,<0.001,Complete-tree repeated-measures analysis; DMF extraction
-Pigments,Total chlorophyll,total_chl_ug_cm2,µg cm^-2,raw,NA,site:species,Site × species,2,NA,2.138658126985702,0.14678670230137905,0.147,Complete-tree repeated-measures analysis; DMF extraction
+Pigments,Total chlorophyll,total_chl_ug_cm2,µg cm^-2,raw,NA,site        ,site        ,1,NA,0.02128258084261167,0.8856330941800564,0.886,Complete-tree repeated-measures analysis; DMF extraction
+Pigments,Total chlorophyll,total_chl_ug_cm2,µg cm^-2,raw,NA,species     ,species     ,2,NA,156.2449270092911,4.217250171701259e-12,<0.001,Complete-tree repeated-measures analysis; DMF extraction
+Pigments,Total chlorophyll,total_chl_ug_cm2,µg cm^-2,raw,NA,site:species,Site × species,2,NA,3.7032656039453467,0.04497220461853616,0.045,Complete-tree repeated-measures analysis; DMF extraction
 Pigments,Total chlorophyll,total_chl_ug_cm2,µg cm^-2,raw,NA,Residuals   ,Residuals   ,18,NA,NA,NA,NA,Complete-tree repeated-measures analysis; DMF extraction
-Pigments,Total chlorophyll,total_chl_ug_cm2,µg cm^-2,raw,NA,week_f             ,week_f             ,9,NA,8.866421943690877,8.3145665836938e-11,<0.001,Complete-tree repeated-measures analysis; DMF extraction
-Pigments,Total chlorophyll,total_chl_ug_cm2,µg cm^-2,raw,NA,site:week_f        ,site:week_f        ,9,NA,0.5454370844163198,0.8395352557742738,0.840,Complete-tree repeated-measures analysis; DMF extraction
-Pigments,Total chlorophyll,total_chl_ug_cm2,µg cm^-2,raw,NA,species:week_f     ,species:week_f     ,18,NA,3.431212073505559,1.3699059894362257e-5,<0.001,Complete-tree repeated-measures analysis; DMF extraction
-Pigments,Total chlorophyll,total_chl_ug_cm2,µg cm^-2,raw,NA,site:species:week_f,Site × species × week,18,NA,0.846151650726252,0.6438292162062642,0.644,Complete-tree repeated-measures analysis; DMF extraction
+Pigments,Total chlorophyll,total_chl_ug_cm2,µg cm^-2,raw,NA,week_f             ,week_f             ,9,NA,9.175222045222936,3.557732329669154e-11,<0.001,Complete-tree repeated-measures analysis; DMF extraction
+Pigments,Total chlorophyll,total_chl_ug_cm2,µg cm^-2,raw,NA,site:week_f        ,site:week_f        ,9,NA,0.41607154779763483,0.9252016861026552,0.925,Complete-tree repeated-measures analysis; DMF extraction
+Pigments,Total chlorophyll,total_chl_ug_cm2,µg cm^-2,raw,NA,species:week_f     ,species:week_f     ,18,NA,2.1144918448042938,0.007422537637739261,0.007,Complete-tree repeated-measures analysis; DMF extraction
+Pigments,Total chlorophyll,total_chl_ug_cm2,µg cm^-2,raw,NA,site:species:week_f,Site × species × week,18,NA,0.8861506410197837,0.5959324211678483,0.596,Complete-tree repeated-measures analysis; DMF extraction
 Pigments,Total chlorophyll,total_chl_ug_cm2,µg cm^-2,raw,NA,Residuals          ,Residuals          ,162,NA,NA,NA,NA,Complete-tree repeated-measures analysis; DMF extraction
 Water status,Midday leaf water potential,wp_mpa,MPa,raw,NA,site        ,site        ,1,NA,0.498148184945801,0.4911320251705714,0.491,Complete-tree repeated-measures analysis; pressure chamber values converted from bar to MPa and reported as negative leaf water potential
 Water status,Midday leaf water potential,wp_mpa,MPa,raw,NA,species     ,species     ,2,NA,35.16677822933763,2.1741304403168754e-6,<0.001,Complete-tree repeated-measures analysis; pressure chamber values converted from bar to MPa and reported as negative leaf water potential
@@ -74,14 +74,14 @@ Water status,Midday leaf water potential,wp_mpa,MPa,raw,NA,site:week_f        ,s
 Water status,Midday leaf water potential,wp_mpa,MPa,raw,NA,species:week_f     ,species:week_f     ,18,NA,2.6609933116971454,7.179861221196794e-4,<0.001,Complete-tree repeated-measures analysis; pressure chamber values converted from bar to MPa and reported as negative leaf water potential
 Water status,Midday leaf water potential,wp_mpa,MPa,raw,NA,site:species:week_f,Site × species × week,18,NA,1.4153534424071623,0.13385255853433198,0.134,Complete-tree repeated-measures analysis; pressure chamber values converted from bar to MPa and reported as negative leaf water potential
 Water status,Midday leaf water potential,wp_mpa,MPa,raw,NA,Residuals          ,Residuals          ,135,NA,NA,NA,NA,Complete-tree repeated-measures analysis; pressure chamber values converted from bar to MPa and reported as negative leaf water potential
-Leaf chemistry,Foliar N,log_nitro_perc,%,natural log,NA,site        ,site        ,1,NA,11.575831695113658,0.00255706942365349,0.003,Complete-tree repeated-measures analysis
-Leaf chemistry,Foliar N,log_nitro_perc,%,natural log,NA,species     ,species     ,2,NA,130.7514772710505,6.144916798982014e-13,<0.001,Complete-tree repeated-measures analysis
-Leaf chemistry,Foliar N,log_nitro_perc,%,natural log,NA,site:species,Site × species,2,NA,0.8595493677418502,0.43708859721075144,0.437,Complete-tree repeated-measures analysis
+Leaf chemistry,Foliar N,log_nitro_perc,%,natural log,NA,site        ,site        ,1,NA,14.414955628558417,9.88966969126175e-4,<0.001,Complete-tree repeated-measures analysis
+Leaf chemistry,Foliar N,log_nitro_perc,%,natural log,NA,species     ,species     ,2,NA,164.3834603763203,5.908055359527413e-14,<0.001,Complete-tree repeated-measures analysis
+Leaf chemistry,Foliar N,log_nitro_perc,%,natural log,NA,site:species,Site × species,2,NA,0.8702602948458543,0.4327697237770883,0.433,Complete-tree repeated-measures analysis
 Leaf chemistry,Foliar N,log_nitro_perc,%,natural log,NA,Residuals   ,Residuals   ,22,NA,NA,NA,NA,Complete-tree repeated-measures analysis
-Leaf chemistry,Foliar N,log_nitro_perc,%,natural log,NA,week_f             ,week_f             ,9,NA,37.89109784641493,1.611104343265682e-38,<0.001,Complete-tree repeated-measures analysis
-Leaf chemistry,Foliar N,log_nitro_perc,%,natural log,NA,site:week_f        ,site:week_f        ,9,NA,2.6334486578461216,0.006717972611305311,0.007,Complete-tree repeated-measures analysis
-Leaf chemistry,Foliar N,log_nitro_perc,%,natural log,NA,species:week_f     ,species:week_f     ,18,NA,1.6663934040028947,0.04794872192676836,0.048,Complete-tree repeated-measures analysis
-Leaf chemistry,Foliar N,log_nitro_perc,%,natural log,NA,site:species:week_f,Site × species × week,18,NA,0.9916359190629098,0.4708880435966335,0.471,Complete-tree repeated-measures analysis
+Leaf chemistry,Foliar N,log_nitro_perc,%,natural log,NA,week_f             ,week_f             ,9,NA,38.062072440082865,1.2218784667362403e-38,<0.001,Complete-tree repeated-measures analysis
+Leaf chemistry,Foliar N,log_nitro_perc,%,natural log,NA,site:week_f        ,site:week_f        ,9,NA,2.0771236480785804,0.03319159426430854,0.033,Complete-tree repeated-measures analysis
+Leaf chemistry,Foliar N,log_nitro_perc,%,natural log,NA,species:week_f     ,species:week_f     ,18,NA,2.729226636420545,3.3822275012634575e-4,<0.001,Complete-tree repeated-measures analysis
+Leaf chemistry,Foliar N,log_nitro_perc,%,natural log,NA,site:species:week_f,Site × species × week,18,NA,0.9302410690997127,0.5428668647112922,0.543,Complete-tree repeated-measures analysis
 Leaf chemistry,Foliar N,log_nitro_perc,%,natural log,NA,Residuals          ,Residuals          ,198,NA,NA,NA,NA,Complete-tree repeated-measures analysis
 Leaf chemistry,C:N,log_CN_ratio,unitless,natural log,NA,site        ,site        ,1,NA,11.690883132496289,0.002456130612167906,0.002,Complete-tree repeated-measures analysis
 Leaf chemistry,C:N,log_CN_ratio,unitless,natural log,NA,species     ,species     ,2,NA,129.87678815252954,6.577875952077159e-13,<0.001,Complete-tree repeated-measures analysis

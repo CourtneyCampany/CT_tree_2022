@@ -292,51 +292,13 @@ hawthorn_A_contrasts
 
 ##Step: Final figure for photosynthesis
 
-A_summary_species <- gx %>%
-  group_by(species, site, week) %>%
-  summarise(
-    n = n(),
-    mean_A = mean(A),
-    se_A = sd(A) / sqrt(n),
-    .groups = "drop"
-  )
-
-ggplot(
-  A_summary_species,
-  aes(x = week, y = mean_A, color = site, group = site)
-) +
-  geom_line(linewidth = 0.85) +
-  geom_point(size = 2.2) +
-  geom_errorbar(
-    aes(
-      ymin = mean_A - se_A,
-      ymax = mean_A + se_A
-    ),
-    width = 0.12,
-    linewidth = 0.45
-  ) +
-  facet_wrap(~ species, nrow = 1) +
-  scale_x_continuous(breaks = 1:10) +
-  labs(
-    x = "Measurement week",
-    y = expression(italic(A)~"("*mu*"mol CO"[2]~m^-2~s^-1*")"),
-    color = "Site"
-  ) +
-  theme_classic(base_size = 11) +
-  theme(
-    legend.position = "bottom",
-    strip.background = element_blank(),
-    strip.text = element_text(face = "plain")
-  )
-
-
-##Figure if I want to point out week 2 for hawthorn
-# A_asterisk <- A_summary_species %>%
-#   filter(species == "Hawthorn", week == 2) %>%
+# A_summary_species <- gx %>%
+#   group_by(species, site, week) %>%
 #   summarise(
-#     species = first(species),
-#     week = first(week),
-#     y = max(mean_A + se_A) + 1.5
+#     n = n(),
+#     mean_A = mean(A),
+#     se_A = sd(A) / sqrt(n),
+#     .groups = "drop"
 #   )
 # 
 # ggplot(
@@ -353,12 +315,6 @@ ggplot(
 #     width = 0.12,
 #     linewidth = 0.45
 #   ) +
-#   geom_text(
-#     data = A_asterisk,
-#     aes(x = week, y = y, label = "*"),
-#     inherit.aes = FALSE,
-#     size = 5
-#   ) +
 #   facet_wrap(~ species, nrow = 1) +
 #   scale_x_continuous(breaks = 1:10) +
 #   labs(
@@ -372,6 +328,7 @@ ggplot(
 #     strip.background = element_blank(),
 #     strip.text = element_text(face = "plain")
 #   )
+
 
 ##Step: Plotting and Repeated Measures for gsw-----
 
@@ -488,33 +445,34 @@ gsw_summary <- gx %>%
     .groups = "drop"
   )
 
-ggplot(
-  gsw_summary,
-  aes(x = week, y = mean_gsw, color = site, group = site)
-) +
-  geom_line(linewidth = 0.85) +
-  geom_point(size = 2.2) +
-  geom_errorbar(
-    aes(
-      ymin = mean_gsw - se_gsw,
-      ymax = mean_gsw + se_gsw
-    ),
-    width = 0.12,
-    linewidth = 0.45
-  ) +
-  facet_wrap(~ species, nrow = 1) +
-  scale_x_continuous(breaks = 1:10) +
-  labs(
-    x = "Measurement week",
-    y = expression(italic(g)[sw]~"(mol H"[2]*"O "~m^-2~s^-1*")"),
-    color = "Site"
-  ) +
-  theme_classic(base_size = 11) +
-  theme(
-    legend.position = "bottom",
-    strip.background = element_blank(),
-    strip.text = element_text(face = "plain")
-  )
+# ggplot(
+#   gsw_summary,
+#   aes(x = week, y = mean_gsw, color = site, group = site)
+# ) +
+#   geom_line(linewidth = 0.85) +
+#   geom_point(size = 2.2) +
+#   geom_errorbar(
+#     aes(
+#       ymin = mean_gsw - se_gsw,
+#       ymax = mean_gsw + se_gsw
+#     ),
+#     width = 0.12,
+#     linewidth = 0.45
+#   ) +
+#   facet_wrap(~ species, nrow = 1) +
+#   scale_x_continuous(breaks = 1:10) +
+#   labs(
+#     x = "Measurement week",
+#     y = expression(italic(g)[sw]~"(mol H"[2]*"O "~m^-2~s^-1*")"),
+#     color = "Site"
+#   ) +
+#   theme_classic(base_size = 11) +
+#   theme(
+#     legend.position = "bottom",
+#     strip.background = element_blank(),
+#     strip.text = element_text(face = "plain")
+#   )
+
 ##Step: Plotting and Repeated Measures for E-----
 
 rm_E <- aov(
@@ -618,35 +576,33 @@ E_summary <- gx %>%
     .groups = "drop"
   )
 
-ggplot(
-  E_summary,
-  aes(x = week, y = mean_E, color = site, group = site)
-) +
-  geom_line(linewidth = 0.85) +
-  geom_point(size = 2.2) +
-  geom_errorbar(
-    aes(
-      ymin = mean_E - se_E,
-      ymax = mean_E + se_E
-    ),
-    width = 0.12,
-    linewidth = 0.45
-  ) +
-  facet_wrap(~ species, nrow = 1) +
-  scale_x_continuous(breaks = 1:10) +
-  labs(
-    x = "Measurement week",
-    y = expression(italic(E)~"(mmol H"[2]*"O "~m^-2~s^-1*")"),
-    color = "Site"
-  ) +
-  theme_classic(base_size = 11) +
-  theme(
-    legend.position = "bottom",
-    strip.background = element_blank(),
-    strip.text = element_text(face = "plain")
-  )
-
-
+# ggplot(
+#   E_summary,
+#   aes(x = week, y = mean_E, color = site, group = site)
+# ) +
+#   geom_line(linewidth = 0.85) +
+#   geom_point(size = 2.2) +
+#   geom_errorbar(
+#     aes(
+#       ymin = mean_E - se_E,
+#       ymax = mean_E + se_E
+#     ),
+#     width = 0.12,
+#     linewidth = 0.45
+#   ) +
+#   facet_wrap(~ species, nrow = 1) +
+#   scale_x_continuous(breaks = 1:10) +
+#   labs(
+#     x = "Measurement week",
+#     y = expression(italic(E)~"(mmol H"[2]*"O "~m^-2~s^-1*")"),
+#     color = "Site"
+#   ) +
+#   theme_classic(base_size = 11) +
+#   theme(
+#     legend.position = "bottom",
+#     strip.background = element_blank(),
+#     strip.text = element_text(face = "plain")
+#   )
 
 ##Step: Plotting and Repeated Measures for iWUE-----
 
@@ -770,35 +726,35 @@ iWUE_summary <- gx %>%
     .groups = "drop"
   )
 
-ggplot(
-  iWUE_summary,
-  aes(x = week, y = mean_iWUE, color = site, group = site)
-) +
-  geom_line(linewidth = 0.85) +
-  geom_point(size = 2.2) +
-  geom_errorbar(
-    aes(
-      ymin = mean_iWUE - se_iWUE,
-      ymax = mean_iWUE + se_iWUE
-    ),
-    width = 0.12,
-    linewidth = 0.45
-  ) +
-  facet_wrap(~ species, nrow = 1) +
-  scale_x_continuous(breaks = 1:10) +
-  labs(
-    x = "Measurement week",
-    y = expression(
-      "Intrinsic WUE (" * mu * "mol CO"[2] ~ "mol"^-1 ~ "H"[2] * "O)"
-    ),
-    color = "Site"
-  ) +
-  theme_classic(base_size = 11) +
-  theme(
-    legend.position = "bottom",
-    strip.background = element_blank(),
-    strip.text = element_text(face = "plain")
-  )
+# ggplot(
+#   iWUE_summary,
+#   aes(x = week, y = mean_iWUE, color = site, group = site)
+# ) +
+#   geom_line(linewidth = 0.85) +
+#   geom_point(size = 2.2) +
+#   geom_errorbar(
+#     aes(
+#       ymin = mean_iWUE - se_iWUE,
+#       ymax = mean_iWUE + se_iWUE
+#     ),
+#     width = 0.12,
+#     linewidth = 0.45
+#   ) +
+#   facet_wrap(~ species, nrow = 1) +
+#   scale_x_continuous(breaks = 1:10) +
+#   labs(
+#     x = "Measurement week",
+#     y = expression(
+#       "Intrinsic WUE (" * mu * "mol CO"[2] ~ "mol"^-1 ~ "H"[2] * "O)"
+#     ),
+#     color = "Site"
+#   ) +
+#   theme_classic(base_size = 11) +
+#   theme(
+#     legend.position = "bottom",
+#     strip.background = element_blank(),
+#     strip.text = element_text(face = "plain")
+#   )
 
 
 ##possible stand-alone difference plot iWUE figure that better shows interaction
@@ -818,23 +774,23 @@ iWUE_difference <- gx %>%
     difference = Downtown - Park
   )
 
-ggplot(
-  iWUE_difference,
-  aes(x = week, y = difference, color = species, group = species)
-) +
-  geom_hline(yintercept = 0, linetype = "dashed", linewidth = 0.5) +
-  geom_line(linewidth = 0.85) +
-  geom_point(size = 2.2) +
-  scale_x_continuous(breaks = 1:10) +
-  labs(
-    x = "Measurement week",
-    y = expression(Delta*"iWUE (Downtown - Park; "*mu*"mol CO"[2]~"mol"^-1~"H"[2]*"O)"),
-    color = "Species"
-  ) +
-  theme_classic(base_size = 11) +
-  theme(
-    legend.position = "bottom"
-  )
+# ggplot(
+#   iWUE_difference,
+#   aes(x = week, y = difference, color = species, group = species)
+# ) +
+#   geom_hline(yintercept = 0, linetype = "dashed", linewidth = 0.5) +
+#   geom_line(linewidth = 0.85) +
+#   geom_point(size = 2.2) +
+#   scale_x_continuous(breaks = 1:10) +
+#   labs(
+#     x = "Measurement week",
+#     y = expression(Delta*"iWUE (Downtown - Park; "*mu*"mol CO"[2]~"mol"^-1~"H"[2]*"O)"),
+#     color = "Species"
+#   ) +
+#   theme_classic(base_size = 11) +
+#   theme(
+#     legend.position = "bottom"
+#   )
 
 
 ##SteP: Create dataframe of model outputs

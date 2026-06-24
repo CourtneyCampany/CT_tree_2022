@@ -194,7 +194,7 @@ dbh_growth_stats <- extract_simple_aov_pvalues(
   notes = "Tree-level DBH growth slope across 10 measurement weeks"
 )
 
-summary(dbh_growth_aov) ##DOES THIS MATCH, REMOVE WHEN YES
+# summary(dbh_growth_aov) 
 
 
 ##STEP: A, gsw, E, iWUE-------
@@ -310,10 +310,10 @@ iWUE_aov <- aov(
   data = gx_complete
 )
 
-summary(A_aov) ##DOES THIS MATCH, REMOVE WHEN YES
-summary(gsw_aov) ##DOES THIS MATCH, REMOVE WHEN YES
-summary(E_aov) ##DOES THIS MATCH, REMOVE WHEN YES
-summary(iWUE_aov) ##DOES THIS MATCH, REMOVE WHEN YES
+# summary(A_aov) 
+# summary(gsw_aov) 
+# summary(E_aov) 
+# summary(iWUE_aov) 
 
 #extract and add to table
 A_stats <- extract_primary_aov_pvalues(
@@ -409,7 +409,7 @@ rm_lma  <- aov(
   data = leaf_complete
 )
 
-summary(rm_lma) ##DOES THIS MATCH, REMOVE WHEN YES
+# summary(rm_lma)
 
 # Extract LMA stats for manuscript table
 
@@ -423,7 +423,7 @@ lma_stats <- extract_primary_aov_pvalues(
   notes = "Complete-tree repeated-measures analysis; trees retained only when LMA was present for all 10 weeks"
 )
 
-lma_stats
+# lma_stats
 
 ##Step: Stomatal density-----
 
@@ -493,7 +493,7 @@ rm_stomatal_density <- aov(
   data = stomata_density_primary
 )
 
-summary(rm_stomatal_density)##DOES THIS MATCH, REMOVE WHEN YES
+# summary(rm_stomatal_density)
 
 # Extract stomatal-density stats for manuscript table
 
@@ -506,8 +506,6 @@ stomatal_density_stats <- extract_primary_aov_pvalues(
   scale = "raw",
   notes = "Complete-tree repeated-measures analysis; weeks 2–10 only"
 )
-
-stomatal_density_stats
 
 ##Step: Chlorophyll------
 
@@ -579,15 +577,15 @@ complete_chl_trees <- chl_tree_completeness %>%
 chl_complete <- chl_extract %>%
   filter(tree_id %in% complete_chl_trees)
 
-#run model
+#run model with log (confirmed primary stats script)
 
 rm_total_chl <- aov(
-  total_chl_ug_cm2 ~ site * species * week_f +
+  log(total_chl_ug_cm2) ~ site * species * week_f +
     Error(tree_id / week_f),
   data = chl_complete
 )
 
-summary(rm_total_chl) ##DOES THIS MATCH, REMOVE WHEN YES
+# summary(rm_total_chl) 
 
 # Extract total chlorophyll stats for manuscript table
 
@@ -667,7 +665,7 @@ rm_wp <- aov(
   data = water_primary_complete
 )
 
-summary(rm_wp) ##DOES THIS MATCH, REMOVE WHEN YES
+# summary(rm_wp)
 
 # Extract midday leaf water potential stats for manuscript table
 
@@ -728,7 +726,7 @@ isotope_complete <- isotope_data %>%
 #run models for N, CN, and 13C
 
 rm_nitro <- aov(
-  nitro_perc ~ site * species * week_f +
+  log(nitro_perc) ~ site * species * week_f +
     Error(tree_id / week_f),
   data = isotope_complete
 )
@@ -745,9 +743,9 @@ rm_c13 <- aov(
   data = isotope_complete
 )
 
-summary(rm_nitro) ##DOES THIS MATCH, REMOVE WHEN YES
-summary(rm_CN) ##DOES THIS MATCH, REMOVE WHEN YES
-summary(rm_c13) ##DOES THIS MATCH, REMOVE WHEN YES
+# summary(rm_nitro) 
+# summary(rm_CN) 
+# summary(rm_c13) 
 
 # Extract chemistry/isotope stats
 
@@ -816,4 +814,3 @@ write_csv(
   "figures/charles_town_primary_aov_p_table.csv"
 )
 
-primary_aov_p_table

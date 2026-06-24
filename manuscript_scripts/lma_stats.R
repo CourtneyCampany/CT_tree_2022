@@ -23,8 +23,6 @@ leaf_audit <- leaf_raw %>%
     sla_m2_kg = 1000 / lma_g_m2
   )
 
-glimpse(leaf_audit)
-
 #check for repeated measure completeness
 leaf_tree_completeness <- leaf_audit %>%
   group_by(site, species, replicate, tree_id) %>%
@@ -36,13 +34,7 @@ leaf_tree_completeness <- leaf_audit %>%
   ) %>%
   arrange(site, species, replicate)
 
-leaf_tree_completeness
-
-leaf_tree_completeness %>%
-  count(n_lma)
-
-leaf_tree_completeness %>%
-  filter(n_lma < 10)
+# leaf_tree_completeness
 
 #Prepare candidate complete-tree dataset
 complete_leaf_trees <- leaf_tree_completeness %>%
@@ -78,7 +70,7 @@ leaf_scale_check <- leaf_complete %>%
     max_log_lma = max(log_lma_g_m2, na.rm = TRUE)
   )
 
-leaf_scale_check
+# leaf_scale_check
 # 
 # qqnorm(leaf_complete$log_lma_g_m2)
 # qqline(leaf_complete$log_lma_g_m2)

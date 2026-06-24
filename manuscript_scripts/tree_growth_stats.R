@@ -60,13 +60,6 @@ dbh_weekly_pit$initial_dbh <- ave(
 dbh_weekly_pit$dbh_change_from_initial <-
   dbh_weekly_pit$dbh_mm - dbh_weekly_pit$initial_dbh
 
-sum(
-  dbh_weekly_pit$week == 1 &
-    dbh_weekly_pit$dbh_change_from_initial == 0
-)
-
-range(dbh_weekly_pit$dbh_change_from_initial)
-
 # Create one-row-per-tree growth dataset
 tree_growth_pit <- do.call(
   rbind,

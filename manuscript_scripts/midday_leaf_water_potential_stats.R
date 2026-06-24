@@ -59,14 +59,6 @@ water_primary_complete <- water_audit %>%
     by = "tree_id"
   )
 
-# water_primary_complete %>%
-#   summarise(
-#     n_rows = n(),
-#     n_trees = n_distinct(tree_id),
-#     n_missing_wp_mpa = sum(is.na(wp_mpa))
-#   )
-
-
 water_primary_complete <- water_primary_complete %>%
   mutate(
     wp_mag_mpa = abs(wp_mpa),
@@ -374,81 +366,81 @@ summary(rm_water_pit) #no pit size effects (STOP)
 
 ##Step: Plot water potential data-----
 
-#labels
-site_labels <- c(
-  c = "Downtown",
-  p = "Park"
-)
-
-species_labels <- c(
-  d = "Dogwood",
-  h = "Hawthorn",
-  m = "Maple"
-)
-
-water_species_week_plot <- water_primary_complete %>%
-  group_by(species, week) %>%
-  summarise(
-    n = sum(!is.na(wp_mpa)),
-    mean_wp_mpa = mean(wp_mpa, na.rm = TRUE),
-    sd_wp_mpa = sd(wp_mpa, na.rm = TRUE),
-    se_wp_mpa = sd_wp_mpa / sqrt(n),
-    .groups = "drop"
-  ) %>%
-  mutate(
-    species_label = factor(species_labels[as.character(species)],
-                           levels = species_labels)
-  )
-
-water_site_week_plot <- water_primary_complete %>%
-  group_by(site, week) %>%
-  summarise(
-    n = sum(!is.na(wp_mpa)),
-    mean_wp_mpa = mean(wp_mpa, na.rm = TRUE),
-    sd_wp_mpa = sd(wp_mpa, na.rm = TRUE),
-    se_wp_mpa = sd_wp_mpa / sqrt(n),
-    .groups = "drop"
-  ) %>%
-  mutate(
-    site_label = factor(site_labels[as.character(site)],
-                        levels = site_labels)
-  )
-
-#Species × week pattern
-
-fig_water_species <- ggplot(
-  water_species_week_plot,
-  aes(
-    x = week,
-    y = mean_wp_mpa,
-    group = species_label,
-    linetype = species_label,
-    shape = species_label
-  )
-) +
-  geom_line(linewidth = 0.7) +
-  geom_point(size = 2.2) +
-  geom_errorbar(
-    aes(
-      ymin = mean_wp_mpa - se_wp_mpa,
-      ymax = mean_wp_mpa + se_wp_mpa
-    ),
-    width = 0.15,
-    linewidth = 0.4
-  ) +
-  scale_x_continuous(breaks = 1:10) +
-  labs(
-    x = "Week",
-    y = expression("Midday leaf water potential (MPa)"),
-    linetype = "Species",
-    shape = "Species"
-  ) +
-  theme_classic() +
-  theme(
-    legend.position = "right"
-  )
-
-fig_water_species
+# #labels
+# site_labels <- c(
+#   c = "Downtown",
+#   p = "Park"
+# )
+# 
+# species_labels <- c(
+#   d = "Dogwood",
+#   h = "Hawthorn",
+#   m = "Maple"
+# )
+# 
+# water_species_week_plot <- water_primary_complete %>%
+#   group_by(species, week) %>%
+#   summarise(
+#     n = sum(!is.na(wp_mpa)),
+#     mean_wp_mpa = mean(wp_mpa, na.rm = TRUE),
+#     sd_wp_mpa = sd(wp_mpa, na.rm = TRUE),
+#     se_wp_mpa = sd_wp_mpa / sqrt(n),
+#     .groups = "drop"
+#   ) %>%
+#   mutate(
+#     species_label = factor(species_labels[as.character(species)],
+#                            levels = species_labels)
+#   )
+# 
+# water_site_week_plot <- water_primary_complete %>%
+#   group_by(site, week) %>%
+#   summarise(
+#     n = sum(!is.na(wp_mpa)),
+#     mean_wp_mpa = mean(wp_mpa, na.rm = TRUE),
+#     sd_wp_mpa = sd(wp_mpa, na.rm = TRUE),
+#     se_wp_mpa = sd_wp_mpa / sqrt(n),
+#     .groups = "drop"
+#   ) %>%
+#   mutate(
+#     site_label = factor(site_labels[as.character(site)],
+#                         levels = site_labels)
+#   )
+# 
+# #Species × week pattern
+# 
+# fig_water_species <- ggplot(
+#   water_species_week_plot,
+#   aes(
+#     x = week,
+#     y = mean_wp_mpa,
+#     group = species_label,
+#     linetype = species_label,
+#     shape = species_label
+#   )
+# ) +
+#   geom_line(linewidth = 0.7) +
+#   geom_point(size = 2.2) +
+#   geom_errorbar(
+#     aes(
+#       ymin = mean_wp_mpa - se_wp_mpa,
+#       ymax = mean_wp_mpa + se_wp_mpa
+#     ),
+#     width = 0.15,
+#     linewidth = 0.4
+#   ) +
+#   scale_x_continuous(breaks = 1:10) +
+#   labs(
+#     x = "Week",
+#     y = expression("Midday leaf water potential (MPa)"),
+#     linetype = "Species",
+#     shape = "Species"
+#   ) +
+#   theme_classic() +
+#   theme(
+#     legend.position = "right"
+#   )
+# 
+# fig_water_species
 
 #caption = “Mean midday leaf water potential across the 10-week study period for each species, 
 #pooled across sites. Points represent weekly means ± SE. 
